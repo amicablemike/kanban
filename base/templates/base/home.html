@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>Webprojekt</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element my_board_btn">My Boards</li>
+                <li class="nav_element public_board_btn current_page">Public Boards</li>
+            </ul>
+            <div class="flex_help_container">
+                {% if request.user.is_authenticated %}
+                <div class="nav_element acc_expand">Account</div>
+                <div class="popover_account">
+                    <div class="popover_account_container">
+                        <div class="popover_account_button">email@email.com</div>
+                        <div class="popover_account_buttons">
+                            <div class="popover_account_button">my boards</div>
+                            <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
+                                profile</div>
+                        </div>
+                        <div class="popover_account_button">Log out</div>
+                    </div>
+                </div>
+                {% else %}
+                <div class="sign_options">
+                    <a class = "log_in_btn" href="{% url 'login' %}">Log in</a></div>
+                    <a class ="sign_up_btn" href="{% url 'register' %}">Sign up</a>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <!-- start if for my boards when loged in -->
+        <div id="back_color_my_boards">
+            <div class="my_boards_anchor"></div>
+            {% if request.user.is_authenticated %}
+            <div class="board_overview" id="my_boards">
+                <h1>My Boards</h1>
+                <div class="search_container">
+                    <input type="text" class="searchbar" placeholder="Search for Boards" />
+                    <div class="search_btn">
+                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                    </div>
+                </div>
+               
+                <div class="board_previews">
+                    {% include 'base/board_item.html' %}
+                    <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
+                    <div class="public_boards_anchor"></div>
+                </div>
+                <div class="board_preview_expand_container">
+                    <div class="board_preview_expand_line"></div>
+                    <div class="board_preview_expand">show more boards</div>
+                    <div class="board_preview_expand_line"></div>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+        <!-- End If for MyBoards when loged in -->
+        <div id="back_color_public_boards">
+            <div class="board_overview" id="public_boards">
+                <h1>Public Boards</h1>
+                <div class="search_container">
+                    <input type="text" class="searchbar" placeholder="Search for Boards" />
+                    <div class="search_btn">
+                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                    </div>
+                </div>
+                <div class="board_previews">
+                    {% include 'base/board_item.html' %}
+                    <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
+                    <div class="public_boards_anchor"></div>
+                </div>
+                <div class="board_preview_expand_container">
+                    <div class="board_preview_expand_line"></div>
+                    <div class="board_preview_expand">show more boards</div>
+                    <div class="board_preview_expand_line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

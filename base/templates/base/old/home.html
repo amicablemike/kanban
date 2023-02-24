@@ -1,0 +1,30 @@
+{% include 'main.html' %}
+
+{% block content %}
+
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+    }
+</style>
+
+<div class="home-container">
+
+    <div>
+        <a href="{% url 'create-board' %}">Create Board</a>
+        <h3>{{board_count}} Boards available</h3>
+        <hr>
+    
+    <div>
+        {% include 'base/boards_component.html' %}
+    </div>
+
+    </div>
+    
+    <div>
+        {% include 'base/activity_component.html' %}
+    </div>
+</div>
+
+{% endblock content %}

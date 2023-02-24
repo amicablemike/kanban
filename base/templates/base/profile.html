@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="../app.css">
+    <title>My Boards</title>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <!-- currently set to logged in page, change on not logged in -->
+                <h1 class="home" onclick="location.pathname = './Pages/logged_in_startpage.html'">Webprojekt
+                </h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element">Max Mustermann</li>
+            </ul>
+            <div class="flex_help_container">
+                <div class="nav_element acc_expand">Account</div>
+                <div class="popover_account">
+                    <div class="popover_account_container">
+                        <div class="popover_account_button">email@email.com</div>
+                        <div class="popover_account_buttons">
+                            <div class="popover_account_button">my boards</div>
+                            <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
+                                profile</div>
+                        </div>
+                        <div class="popover_account_button">Log out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="profile_settings_container">
+            <form action="" class="profile_settings">
+                <div class="profile_input_title">Profile Settings</div>
+                <div class="profile_settings_input_container">
+                    <div class="profile_input_desc">first name:</div>
+                    <label for="profile_input_first_name">
+                        Max
+                    </label>
+                    <input type="text" placeholder="first name" name="profile_input_first_name">
+                    <div class="profile_input_desc">last name:</div>
+                    <label for="profile_input_last_name">
+                        Mustermann
+                    </label>
+                    <input type="text" placeholder="last name" name="profile_input_last_name">
+                    <div class="profile_input_desc">email:</div>
+                    <label for="profile_input_email">
+                        max.mustermann@gmail.com
+                    </label>
+                    <input type="email" placeholder="email" name="profile_input_email">
+                </div>
+                <div class="profile_input_title">Change Password</div>
+                <div class="change_password_container">
+                    <label for="profile_input_password">set password:</label>
+                    <input type="password" placeholder="password" name="profile_input_password">
+                    <label for="profile_input_password_repeat">repeat password:</label>
+                    <input type="password" placeholder="repeat password" name="profile_input_password_repeat">
+                </div>
+                <div class="main_button save_profile">save</div>
+            </form>
+        </div>
+    </div>
+    <script src="../Scripts/account_expand.js"></script>
+</body>
+
+</html>

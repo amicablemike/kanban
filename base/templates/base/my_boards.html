@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="../app.css">
+    <title>My Boards</title>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <h1 class="home">Webprojekt</h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element my_board_btn">My Boards</li>
+                <li class="nav_element public_board_btn">Public Boards</li>
+            </ul>
+            <div class="flex_help_container">
+                <div class="nav_element acc_expand">Account</div>
+                <div class="popover_account">
+                    <div class="popover_account_container">
+                        <div class="popover_account_button">email@email.com</div>
+                        <div class="popover_account_buttons">
+                            <div class="popover_account_button">my boards</div>
+                            <div class="popover_account_button">profile</div>
+                        </div>
+                        <div class="popover_account_button">Log out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="sidebar left_sidebar">
+            <div class="search_container" id="board_search_titles_container">
+                <input type="text" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
+                <div class="search_btn">
+                    <img src="../Images/Icons/suche.svg" alt="search">
+                </div>
+            </div>
+            <div class="left_sidebar_title_head">Board Titles</div>
+            <ul class="left_sidebar_ul">
+                <li class="left_sidebar_ul_item">ulridawdawdawdadddawdawdawdawddwddwach</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">ulrich</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">ulrich</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">ulrich</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+                <li class="left_sidebar_ul_item">tim</li>
+                <li class="left_sidebar_ul_item">ole</li>
+            </ul>
+        </div>
+    </div>
+    <script src="../Scripts/account_expand.js"></script>
+</body>
+
+</html>

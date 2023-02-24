@@ -1,0 +1,5 @@
+{% for board in boards %}
+    <div>
+        <h5>{{board.id}} -- <a href="{% url 'board' board.id %}">{{board.name}}</a></h5>
+    </div>
+{% endfor %}

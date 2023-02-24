@@ -1,0 +1,68 @@
+{% extends 'main.html' %}
+
+{% block content %}
+
+<style>
+    .board-container{
+        display: grid;
+        grid-template-columns: 4fr 1fr;
+    }
+</style>
+<div class="board-container">
+
+    <div>
+
+    
+
+<h1>{{board.name}}</h1>
+
+<p>{{board.description}}</p>
+
+<div class="comment-wrapper">
+
+    <h3>Conversation</h3>
+    <hr>
+
+    <div>
+        <small>@User  TIME ago</small>
+        <p>Comment</p>
+        <hr>
+    </div>
+    <div>
+        <small>@User  TIME ago</small>
+        <p>Comment</p>
+        <hr>
+    </div>
+    <div>
+        <small>@User  TIME ago</small>
+        <p>Comment</p>
+        <hr>
+    </div>
+
+</div>
+
+{% if request.user.is_authenticated %}
+<div class="comment-form">
+    <form method="POST" action="">
+        {% csrf_token %}
+        <input type="text" name="body" placeholder="Write your message here..." >
+    </form>
+</div>
+
+{% endif %}
+</div>
+
+<div>
+    <h3>Participants</h3>
+    <hr>
+
+    {% for user in participants %}
+    <div>
+        <p>@{{user.username}}</p>
+    </div>
+    {% endfor %}
+
+</div>
+
+</div>
+{% endblock content %}

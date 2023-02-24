@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="../app.css">
+    <title>Webprojekt</title>
+</head>
+
+<body>
+    <div class="backdrop"></div>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <h1 class="home" onclick="location.pathname = './Pages/logged_in_startpage.html'">Webprojekt
+                </h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element my_board_btn">My Boards</li>
+                <li class="nav_element public_board_btn">Public Boards</li>
+            </ul>
+            <div class="flex_help_container">
+                <div class="nav_element acc_expand">Account</div>
+                <div class="popover_account">
+                    <div class="popover_account_container">
+                        <div class="popover_account_button">email@email.com</div>
+                        <div class="popover_account_buttons">
+                            <div class="popover_account_button">my boards</div>
+                            <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
+                                profile</div>
+                        </div>
+                        <div class="popover_account_button">Log out</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div id="back_color_my_boards">
+            <div class="board_overview" id="my_boards">
+                <div class="my_boards_anchor"></div>
+                <h1>My Boards</h1>
+                <div class="search_container">
+                    <input type="text" class="searchbar" placeholder="Search for Boards" />
+                    <div class="search_btn">
+                        <img src="../Images/Icons/suche.svg" alt="search">
+                    </div>
+                </div>
+                <div class="board_previews">
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="add_board">
+                        <div class="add_board_title">add board</div>
+                        <div class="add_board_icon">
+                            <img src="../Images/Add Board.png" alt="">
+                        </div>
+                    </div>
+                </div>
+                <div class="board_preview_expand_container">
+                    <div class="board_preview_expand_line"></div>
+                    <div class="board_preview_expand">show more boards</div>
+                    <div class="board_preview_expand_line"></div>
+                </div>
+            </div>
+        </div>
+        <div id="back_color_public_boards">
+            <div class="board_overview" id="public_boards">
+                <h1>Public Boards</h1>
+                <div class="search_container">
+                    <input type="text" class="searchbar" placeholder="Search for Boards" />
+                    <div class="search_btn">
+                        <img src="../Images/Icons/suche.svg" alt="search">
+                    </div>
+                </div>
+                <div class="board_previews">
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="board_preview" onclick="location.pathname = './Pages/board.html'">
+                        <div class="board_preview_title">Title 1</div>
+                        <div class="board_preview_description">
+                            <img src="../Images/PreviewGraphic Board.png" alt="">
+                        </div>
+                    </div>
+                    <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
+                    <div class="add_board">
+                        <div class="add_board_title">add board</div>
+                        <div class="add_board_icon">
+                            <img src="../Images/Add Board.png" alt="">
+                        </div>
+                    </div>
+                    <div class="public_boards_anchor"></div>
+                </div>
+                <div class="board_preview_expand_container">
+                    <div class="board_preview_expand_line"></div>
+                    <div class="board_preview_expand">show more boards</div>
+                    <div class="board_preview_expand_line"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="edit_board_container ">
+        <form class="edit_board">
+            <div class="edit_board_overlay_title">Board Settings</div>
+            <label for="edit_board_title">
+                Title
+            </label>
+            <input type="text" name="edit_board_title" placeholder="new title">
+            <label for="edit_board_description">
+                Description
+            </label>
+            <textarea name="edit_board_description" id="card_desc_input" cols="30" rows="5"
+                placeholder="new description"></textarea>
+            <label for="edit_board_select_participant">
+                Participants
+                <!-- list of people -->
+            </label>
+            <select name="edit_board_select_participant" id="">
+                <option value="1">Mike</option>
+                <option value="2">Fabian</option>
+                <option value="3">Roman</option>
+            </select>
+            <div></div>
+            <div class="edit_board_button_selection">
+                <div class="main_button promote_participant">to owner</div>
+                <div class="main_button kick_participant">kick</div>
+            </div>
+            <label for="edit_board_add_participant">
+                Add Participant
+            </label>
+            <input type="email" placeholder="add user with email" name="edit_board_add_participant">
+            <div style="height: 2rem"></div>
+            <div class="edit_board_button_selection">
+                <div class="main_button" style="visibility: hidden"></div>
+                <div class="main_button" id="edit_participant_add">add</div>
+            </div>
+            <div id="border_settings"></div>
+            <div class="edit_board_button_selection">
+                <div class="main_button" style="visibility: hidden"></div>
+                <div class="main_button" id="edit_board_delete">delete</div>
+            </div>
+            <div class="edit_board_button_selection">
+                <div class="main_button" id="edit_board_cancel">cancel</div>
+                <div class="main_button" id="edit_board_save">save</div>
+            </div>
+        </form>
+    </div>
+    <script src="../Scripts/account_expand.js"></script>
+    <script src="../Scripts/homepage.js"></script>
+</body>
+
+</html>

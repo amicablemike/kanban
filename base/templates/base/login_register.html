@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+
+{% load static %}
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>Log in</title>
+</head>
+
+<body>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <!-- currently set to logged in page, change on not logged in -->
+                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element">Log in</li>
+            </ul>
+            <div class=" flex_help_container">
+                <div class="sign_options">
+                    <a class = "log_in_btn" href="{% url 'login' %}">Log in</a></div>
+                    <a class ="sign_up_btn" href="{% url 'register' %}">Sign up</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="back_color_sign_in">
+            <div class="sign_in_container">
+                <h1>Webprojekt</h1>
+                <h3>by Fabian Kowalczyk, Roman Gerheim, Johannes Bahne and Mike Werner</h3>
+                <h1>Log in</h1>
+                <form action="">
+                    <div style="border-top: 1px solid white"></div>
+                    <div class="sign_in_item">
+                        <label for="" class="label">
+                            E-Mail
+                            <input type="text" name="email">
+                        </label>
+                    </div>
+                    <div class="sign_in_item">
+                        <label for="" class="label">
+                            Password
+                            <input type="password" name="password" maxlength="30" minlength="6">
+                        </label>
+                    </div>
+                    <div class="sign_in_item">
+                        <button class="main_button">Next</button>
+                    </div>
+                    <div class="sign_in_item">
+                        <a href="">No account? Sign up now</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src=""></script>
+</body>
+
+</html>
