@@ -19,19 +19,20 @@
 </head>
 
 <body>
+    {% if page == 'login' %}
     <header>
         <div class="navbar">
             <div class="flex_help_container">
                 <!-- currently set to logged in page, change on not logged in -->
-                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
             </div>
             <ul class="nav_elements">
                 <li class="nav_element">Log in</li>
             </ul>
             <div class=" flex_help_container">
                 <div class="sign_options">
-                    <a class = "log_in_btn" href="{% url 'login' %}">Log in</a></div>
-                    <a class ="sign_up_btn" href="{% url 'register' %}">Sign up</a>
+                    <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
+                    <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
                 </div>
             </div>
         </div>
@@ -42,31 +43,88 @@
                 <h1>Webprojekt</h1>
                 <h3>by Fabian Kowalczyk, Roman Gerheim, Johannes Bahne and Mike Werner</h3>
                 <h1>Log in</h1>
-                <form action="">
+                <form method="POST" action="/login/">
+                    {% csrf_token %}
+
                     <div style="border-top: 1px solid white"></div>
                     <div class="sign_in_item">
                         <label for="" class="label">
-                            E-Mail
-                            <input type="text" name="email">
+                            Username
+                            <input type="text" id= 'username' name="username" placeholder="Type in your username">
                         </label>
                     </div>
                     <div class="sign_in_item">
                         <label for="" class="label">
                             Password
-                            <input type="password" name="password" maxlength="30" minlength="6">
+                            <input type="password" id='pass1' name="pass1" maxlength="30" minlength="6" placeholder="Type in your password">
                         </label>
                     </div>
                     <div class="sign_in_item">
-                        <button class="main_button">Next</button>
+                        <button type="submit" class="main_button">Login</button>
                     </div>
                     <div class="sign_in_item">
-                        <a href="">No account? Sign up now</a>
+                        <a href="{% url 'register' %}">No account? Sign up now</a>
                     </div>
                 </form>
             </div>
         </div>
     </div>
+
+    <!-- register -->
+    {% else %}
+    <div class="backdrop"></div>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <!-- currently set to logged in page, change on not logged in -->
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element">Sign up</li>
+            </ul>
+            <div class="flex_help_container">
+                <div class="sign_options">
+                    <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
+                    <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="profile_settings_container">
+            <form action="/register/" method="POST" class="profile_settings">
+                {% csrf_token %}
+                <div class="profile_input_title">Set Profile Settings</div>
+                <!-- difference from sign in: profile_add_container -->
+                <div class="profile_add_container">
+                    <div class="profile_input_desc">Username:</div>
+                    <input type="text" id="username" placeholder="Only letters and numbers" name="username">
+                    <div class="profile_input_desc">First name:</div>
+                    <input type="text" id="fname" placeholder="Enter your first name" name="fname">
+                    <div class="profile_input_desc">Last name:</div>
+                    <input type="text" id="lname" placeholder="Enter your last name" name="lname">
+                    <div class="profile_input_desc">Email:</div>
+                    <input type="email" id="email" placeholder="abc@xyz.com" name="email">
+                </div>
+                <div class="profile_input_title">Set Password</div>
+                <div class="change_password_container">
+                    <label for="profile_input_password">Set password:</label>
+                    <input type="password" id="pass1" placeholder="Create a password" name="pass1">
+                    <label for="profile_input_password_repeat">Repeat password:</label>
+                    <input type="password" id="pass2" placeholder="Confirm your password" name="pass2">
+                </div>
+                <!-- <div class="main_button save_profile" type="submit">Signsss up</div> -->
+                <button type="submit" class="main_button save_profile">Signup</button>
+                <div class="sign_in_item">
+                    <a href="{% url 'login' %}">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src=""></script>
 </body>
 
 </html>
+
+{% endif %}

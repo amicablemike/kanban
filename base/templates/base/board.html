@@ -24,11 +24,13 @@
         <div class="navbar">
             <div class="flex_help_container">
                 <!-- currently set to logged in page, change on not logged in -->
-                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
             </div>
             <ul class="nav_elements">
                 <li class="nav_element board_title">{{board.name}}</li>
+                
             </ul>
+            
             <div class="flex_help_container">
                 <div class="nav_element acc_expand">Account</div>
                 <div class="popover_account">
@@ -49,7 +51,9 @@
         <div class="status">
             <div class="sidebar left_sidebar">
                 <div class="left_sidebar_board_title">{{board.name}}</div>
-                <div class="left_sidebar_board_desc">{{bord.description}}</div>
+                <div class="left_sidebar_board_desc">{{board.description}}</div>
+                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'update_board/{{board.id}}/'">edit board</div></div>
+                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = './board/{{board.id}}/create_card/'">new card</div></div>
                 <div class="left_sidebar_participant_head">Participants</div>
                 <ul class="left_sidebar_ul">
                     {% for user in participants %}
@@ -65,34 +69,9 @@
                     <div class="card_dropzone top">
                         <div class="expandable"></div>
                     </div>
-                    <div class="card_container">
-                        <div class="card">
-                            <div class="card_title">Task 0</div>
-                            <div class="card_desc_container">
-                                <div class="card_desc">People</div>
-                                <div class="card_desc_content">user@email.com</div>
-                                <div class="card_desc">Estimate</div>
-                                <div class="card_desc_content"></div>
-                                <div class="card_desc">Prio</div>
-                                <div class="card_desc_content"></div>
-                            </div>
-                            <div class="card_expand">
-                                <div class="card_expand_desc">
-                                    <div class="card_expand_desc_title">description</div>
-                                    <div class="card_expand_desc_content">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing
-                                        elit. Error, eaque ab. A magnam, illum nulla reiciendis perspiciatis delectus
-                                        enim ipsam suscipit quos vel iste facilis officiis voluptatibus id laborum ex?
-                                    </div>
-                                    <div class="main_button edit_card_button">edit</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dropzone">
-                            <div class="expandable"></div>
-                        </div>
-                    </div>
-                    <div class="main_button edit_card_button add_card_button">add card</div>
+                    {% for task in tasks_todo %}
+                    {% include 'base/task_item.html' %}
+                    {% endfor %}
                 </div>
                 <div class="board_column board_column_doing">
                     <div class="column_head">
@@ -101,61 +80,10 @@
                     <div class="card_dropzone top">
                         <div class="expandable"></div>
                     </div>
-                    <div class="card_container">
-                        <div class="card">
-                            <div class="card_title">Task 0</div>
-                            <div class="card_desc_container">
-                                <div class="card_desc">People</div>
-                                <div class="card_desc_content">user@email.com</div>
-                                <div class="card_desc">Estimate</div>
-                                <div class="card_desc_content"></div>
-                                <div class="card_desc">Prio</div>
-                                <div class="card_desc_content"></div>
-                            </div>
-                            <div class="card_expand">
-                                <div class="card_expand_desc">
-                                    <div class="card_expand_desc_title">description</div>
-                                    <div class="card_expand_desc_content">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing
-                                        elit. Error, eaque ab. A magnam, illum nulla reiciendis perspiciatis delectus
-                                        enim ipsam suscipit quos vel iste facilis officiis voluptatibus id laborum ex?
-                                    </div>
-                                    <div class="main_button edit_card_button">edit</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dropzone">
-                            <div class="expandable"></div>
-                        </div>
-                    </div>
-                    <div class="card_container">
-                        <div class="card">
-                            <div class="card_title">Task 0</div>
-                            <div class="card_desc_container">
-                                <div class="card_desc">People</div>
-                                <div class="card_desc_content">user@email.com</div>
-                                <div class="card_desc">Estimate</div>
-                                <div class="card_desc_content"></div>
-                                <div class="card_desc">Prio</div>
-                                <div class="card_desc_content"></div>
-                            </div>
-                            <div class="card_expand">
-                                <div class="card_expand_desc">
-                                    <div class="card_expand_desc_title">description</div>
-                                    <div class="card_expand_desc_content">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing
-                                        elit. Error, eaque ab. A magnam, illum nulla reiciendis perspiciatis delectus
-                                        enim ipsam suscipit quos vel iste facilis officiis voluptatibus id laborum ex?
-                                    </div>
-                                    <div class="main_button edit_card_button">edit</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dropzone">
-                            <div class="expandable"></div>
-                        </div>
-                    </div>
-                    <div class="main_button edit_card_button add_card_button">add card</div>
+
+                    {% for task in tasks_doing %}
+                    {% include 'base/task_item.html' %}
+                    {% endfor %}
                 </div>
                 <div class="board_column board_column_done">
                     <div class="column_head">
@@ -164,162 +92,39 @@
                     <div class="card_dropzone top">
                         <div class="expandable"></div>
                     </div>
-                    <div class="card_container">
-                        <div class="card">
-                            <div class="card_title">Task 0</div>
-                            <div class="card_desc_container">
-                                <div class="card_desc">People</div>
-                                <div class="card_desc_content">user@email.com</div>
-                                <div class="card_desc">Estimate</div>
-                                <div class="card_desc_content"></div>
-                                <div class="card_desc">Prio</div>
-                                <div class="card_desc_content"></div>
-                            </div>
-                            <div class="card_expand">
-                                <div class="card_expand_desc">
-                                    <div class="card_expand_desc_title">description</div>
-                                    <div class="card_expand_desc_content">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing
-                                        elit. Error, eaque ab. A magnam, illum nulla reiciendis perspiciatis delectus
-                                        enim ipsam suscipit quos vel iste facilis officiis voluptatibus id laborum ex?
-                                    </div>
-                                    <div class="main_button edit_card_button">edit</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dropzone">
-                            <div class="expandable"></div>
-                        </div>
+
+                    {% for task in tasks_done %}
+                    {% include 'base/task_item.html' %}
+                    {% endfor %}
                     </div>
-                    <div class="card_container">
-                        <div class="card">
-                            <div class="card_title">Task 0</div>
-                            <div class="card_desc_container">
-                                <div class="card_desc">People</div>
-                                <div class="card_desc_content">user@email.com</div>
-                                <div class="card_desc">Estimate</div>
-                                <div class="card_desc_content"></div>
-                                <div class="card_desc">Prio</div>
-                                <div class="card_desc_content"></div>
-                            </div>
-                            <div class="card_expand">
-                                <div class="card_expand_desc">
-                                    <div class="card_expand_desc_title">description</div>
-                                    <div class="card_expand_desc_content">Lorem ipsum dolor, sit amet consectetur
-                                        adipisicing
-                                        elit. Error, eaque ab. A magnam, illum nulla reiciendis perspiciatis delectus
-                                        enim ipsam suscipit quos vel iste facilis officiis voluptatibus id laborum ex?
-                                    </div>
-                                    <div class="main_button edit_card_button">edit</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card_dropzone">
-                            <div class="expandable"></div>
-                        </div>
-                    </div>
-                    <div class="main_button edit_card_button add_card_button">add card</div>
-                </div>
             </div>
             <div class="sidebar right_sidebar">
                 <div class="search_container" id="board_search_titles_container">
                     <input type="text" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
                     <div class="search_btn">
-                        <img src="../Images/Icons/suche.svg" alt="search">
+                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
                     </div>
                 </div>
                 <div class="right_sidebar_user_task_title">My Tasks</div>
                 <ul class="right_sidebar_user_tasks">
-                    <li>task 1</li>
-                    <li>task 2</li>
+                    {% for task in user_tasks %}
+                    {% if task.board == board %}
+                    <li>{{task.name}}</li>
+                    {% endif %}
+                    {% endfor %}
                 </ul>
                 <div class="main_button leave_board_button">leave board</div>
             </div>
         </div>
     </div>
     <div class="edit_card_container">
-        <form class="edit_card">
-            <label for="edit_card_title">
-                Title
-                <input type="text" name="edit_card_title">
-            </label>
-            <label for="edit_card_description">
-                Description
-                <textarea name="edit_card_description" id="card_desc_input" cols="30" rows="5"></textarea>
-            </label>
-            <label for="edit_card_select_people">
-                People
-                <select name="edit_card_select_people" id="">
-                    <option value="1">Mike</option>
-                    <option value="2">Fabian</option>
-                    <option value="3">Roman</option>
-                </select>
-            </label>
-            <label for="edit_card_estimate">
-                Estimate
-                <input type="date" name="edit_card_estimate">
-            </label>
-            <label for="edit_card_select_prio">
-                Priority
-                <select name="edit_card_select_prio" id="">
-                    <option value="1">low</option>
-                    <option value="2">mid</option>
-                    <option value="3">high</option>
-                </select>
-            </label>
-            <div class="main_button" id="edit_card_delete">delete</div>
-            <div class="main_button" id="edit_card_cancel">cancel</div>
-            <div class="main_button" id="edit_card_save">save</div>
-        </form>
+        {% include 'base/task_form.html' %}
     </div>
     <div class="edit_board_container ">
-        <form class="edit_board">
-            <div class="edit_board_overlay_title">Board Settings</div>
-            <label for="edit_board_title">
-                Title
-            </label>
-            <input type="text" name="edit_board_title" placeholder="new title">
-            <label for="edit_board_description">
-                Description
-            </label>
-            <textarea name="edit_board_description" id="card_desc_input" cols="30" rows="5"
-                placeholder="new description"></textarea>
-            <label for="edit_board_select_participant">
-                Participants
-                <!-- list of people -->
-            </label>
-            <select name="edit_board_select_participant" id="">
-                <option value="1">Mike</option>
-                <option value="2">Fabian</option>
-                <option value="3">Roman</option>
-            </select>
-            <div></div>
-            <div class="edit_board_button_selection">
-                <div class="main_button promote_participant">to owner</div>
-                <div class="main_button kick_participant">kick</div>
-            </div>
-            <label for="edit_board_add_participant">
-                Add Participant
-            </label>
-            <input type="email" placeholder="add user with email" name="edit_board_add_participant">
-            <div style="height: 2rem"></div>
-            <div class="edit_board_button_selection">
-                <div class="main_button" style="visibility: hidden"></div>
-                <div class="main_button" id="edit_participant_add">add</div>
-            </div>
-            <div id="border_settings"></div>
-            <div class="edit_board_button_selection">
-                <div class="main_button" style="visibility: hidden"></div>
-                <div class="main_button" id="edit_board_delete">delete</div>
-            </div>
-            <div class="edit_board_button_selection">
-                <div class="main_button" id="edit_board_cancel">cancel</div>
-                <div class="main_button" id="edit_board_save">save</div>
-            </div>
-        </form>
+        {% include 'base/board_form.html' %}
     </div>
-    <script src="../Scripts/board.js"></script>
-    <script src="../Scripts/account_expand.js"></script>
+    <script src="{% static 'js/board.js' %}"></script>
+    <script src="{% static 'js/account_expand.js' %}"></script>
 </body>
 
 </html>

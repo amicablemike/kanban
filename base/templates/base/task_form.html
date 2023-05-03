@@ -1,0 +1,50 @@
+{% load static %}
+{% block content %}
+
+<form method="POST" action="" class="edit_card">
+    {% csrf_token %}
+
+    <label for="edit_card_title">
+        Title
+        <!-- {{task_form}} -->
+        <input type="text" name="name" placeholder="Enter a title" value={{task.name}}>
+    </label>
+    
+    <label for="edit_card_description">
+        Description
+        <textarea name="description" id="card_desc_input" cols="30" rows="5" placeholder="Enter a description.">{{task.description}}</textarea>
+    </label>
+    <label for="edit_card_select_prio">
+        Status
+        <select name="status" value={{task.status}}>
+            <option value="To-do">To-do</option>
+            <option value="Doing">Doing</option>
+            <option value="Done">Done</option>
+        </select>
+    </label>
+    <!-- <label for="edit_card_select_people">
+        Asignee
+        <select name="edit_card_select_people" id="">
+            {% for user in participants %}
+            <option>{{user.username}}</option>
+            {% endfor %}
+        </select>
+    </label> -->
+    <label for="edit_card_estimate">
+        Estimate
+        <input type="date" name="estimate">
+    </label>
+    <label for="edit_card_select_prio">
+        Priority
+        <select name="priority">
+            <option value="Low">low</option>
+            <option value="Mid">mid</option>
+            <option value="High">high</option>
+        </select>
+    </label>
+    <div class="main_button"  id="edit_card_delete">delete</div>
+    <div class="main_button" id="edit_card_cancel">cancel</div>
+    <button class="main_button" type="submit" type="submit" id="edit_card_save">save</button>
+</form>
+
+{% endblock content %}

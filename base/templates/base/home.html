@@ -22,7 +22,7 @@
     <header>
         <div class="navbar">
             <div class="flex_help_container">
-                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
             </div>
             <ul class="nav_elements">
                 <li class="nav_element my_board_btn">My Boards</li>
@@ -39,13 +39,13 @@
                             <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
                                 profile</div>
                         </div>
-                        <div class="popover_account_button">Log out</div>
+                        <div class="popover_account_button" onclick="location.pathname = './logout'" >Logout</div>
                     </div>
                 </div>
                 {% else %}
                 <div class="sign_options">
-                    <a class = "log_in_btn" href="{% url 'login' %}">Log in</a></div>
-                    <a class ="sign_up_btn" href="{% url 'register' %}">Sign up</a>
+                    <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
+                    <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
                 </div>
                 {% endif %}
             </div>
@@ -62,11 +62,15 @@
                     <input type="text" class="searchbar" placeholder="Search for Boards" />
                     <div class="search_btn">
                         <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                    </div>
+                    </div>  
                 </div>
+                <div class="main_button edit_card_button add_card_button" onclick="location.pathname = './create_board'">new board</div>
+                
                
                 <div class="board_previews">
+                    {% for board in myboards %}
                     {% include 'base/board_item.html' %}
+                    {% endfor %}
                     <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
                     <div class="public_boards_anchor"></div>
                 </div>
@@ -89,7 +93,9 @@
                     </div>
                 </div>
                 <div class="board_previews">
+                    {% for board in boards %}
                     {% include 'base/board_item.html' %}
+                    {% endfor %}
                     <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
                     <div class="public_boards_anchor"></div>
                 </div>
@@ -101,6 +107,8 @@
             </div>
         </div>
     </div>
+    <script src="{% static 'js/account_expand.js' %}"></script>
+
 </body>
 
 </html>

@@ -24,7 +24,7 @@
         <div class="navbar">
             <div class="flex_help_container">
                 <!-- currently set to logged in page, change on not logged in -->
-                <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
             </div>
             <ul class="nav_elements">
                 <li class="nav_element">Sign up</li>
@@ -43,12 +43,12 @@
                 <div class="profile_input_title">Set Profile Settings</div>
                 <!-- difference from sign in: profile_add_container -->
                 <div class="profile_add_container">
-                    <div class="profile_input_desc">first name:</div>
-                    <input type="text" placeholder="first name" name="profile_input_first_name">
-                    <div class="profile_input_desc">last name:</div>
-                    <input type="text" placeholder="last name" name="profile_input_last_name">
-                    <div class="profile_input_desc">email:</div>
-                    <input type="email" placeholder="email" name="profile_input_email">
+                    <div class="profile_input_desc">First name:</div>
+                    <input type="text" placeholder="Type in your first name" name="profile_input_first_name">
+                    <div class="profile_input_desc">Last name:</div>
+                    <input type="text" placeholder="Type in your last name" name="profile_input_last_name">
+                    <div class="profile_input_desc">Email:</div>
+                    <input type="email" placeholder="abc@xyz.com" name="profile_input_email">
                 </div>
                 <div class="profile_input_title">Set Password</div>
                 <div class="change_password_container">

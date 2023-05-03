@@ -1,10 +1,10 @@
-{% for board in boards %}
 {% load static %} 
+
+
 <div class="board_preview" onclick="location.pathname = './board/{{board.id}}'">
+    
     <div class="board_preview_title">{{board.name}}</div>
     <div class="board_preview_description">
         <img src="{% static 'Images/PreviewGraphic Board.png' %}" alt="">
     </div>
 </div>
-
-{% endfor %}

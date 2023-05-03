@@ -1,0 +1,54 @@
+<div class="backdrop"></div>
+    <header>
+        <div class="navbar">
+            <div class="flex_help_container">
+                <!-- currently set to logged in page, change on not logged in -->
+                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
+            </div>
+            <ul class="nav_elements">
+                <li class="nav_element">Sign up</li>
+            </ul>
+            <div class="flex_help_container">
+                <div class="sign_options">
+                    <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
+                    <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="content">
+        <div class="profile_settings_container">
+            <form action="/register/" method="POST" class="profile_settings">
+                {% csrf_token %}
+                <div class="profile_input_title">Set Profile Settings</div>
+                <!-- difference from sign in: profile_add_container -->
+                <div class="profile_add_container">
+                    <div class="profile_input_desc">Username:</div>
+                    <input type="text" id="username" placeholder="Only letters and numbers" name="profile_input_first_name">
+                    <div class="profile_input_desc">First name:</div>
+                    <input type="text" id="fname" placeholder="Enter your first name" name="profile_input_first_name">
+                    <div class="profile_input_desc">Last name:</div>
+                    <input type="text" id="lname" placeholder="Enter your last name" name="profile_input_last_name">
+                    <div class="profile_input_desc">Email:</div>
+                    <input type="email" id="email" placeholder="abc@xyz.com" name="profile_input_email">
+                </div>
+                <div class="profile_input_title">Set Password</div>
+                <div class="change_password_container">
+                    <label for="profile_input_password">Set password:</label>
+                    <input type="password" id="pass1" placeholder="Create a password" name="profile_input_password">
+                    <label for="profile_input_password_repeat">Repeat password:</label>
+                    <input type="password" id="pass2" placeholder="Confirm your password" name="profile_input_password_repeat">
+                </div>
+                <!-- <div class="main_button save_profile" type="submit">Signsss up</div> -->
+                <button type="submit" class="main_button save_profile">Signup</button>
+                <div class="sign_in_item">
+                    <a href="{% url 'login' %}">Already have an account? Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src=""></script>
+</body>
+
+</html>

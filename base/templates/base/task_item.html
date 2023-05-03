@@ -1,0 +1,26 @@
+{% load static %} 
+
+<div class="card_container">
+    <div class="card">
+        <div class="card_title">{{task.name}}</div>
+        <div class="card_desc_container">
+            <div class="card_desc">Owner</div>
+            <div class="card_desc_content">{{task.owner}}</div>
+            <div class="card_desc">Estimate</div>
+            <div class="card_desc_content">{{task.estimate}}</div>
+            <div class="card_desc">Prio</div>
+            <div class="card_desc_content">{{task.priority}}</div>
+        </div>
+        <div class="card_expand">
+            <div class="card_expand_desc">
+                <div class="card_expand_desc_title">description</div>
+                <div class="card_expand_desc_content">{{task.description}}
+                </div>
+                <div class="main_button edit_card_button" onclick="location.pathname = './update_card/{{task.id}}'">edit</div>
+            </div>
+        </div>
+    </div>
+    <div class="card_dropzone">
+        <div class="expandable"></div>
+    </div>
+</div>

@@ -1,0 +1,61 @@
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>{{board.name}}</title>
+</head>
+<form class="edit_board">
+    <div class="edit_board_overlay_title">Board Settings</div>
+    <label for="edit_board_title">
+        Title
+    </label>
+    <input type="text" name="edit_board_title" placeholder="new title">
+    <label for="edit_board_description">
+        Description
+    </label>
+    <textarea name="edit_board_description" id="card_desc_input" cols="30" rows="5"
+        placeholder="new description"></textarea>
+    <label for="edit_board_select_participant">
+        Participants
+        <!-- list of people -->
+    </label>
+    <select name="edit_board_select_participant" id="">
+            {% for user in participants %}
+            <option>{{user.username}}</option>
+            {% endfor %}
+    </select>
+    <div></div>
+    <div class="edit_board_button_selection">
+        <div class="main_button promote_participant">to owner</div>
+        <div class="main_button kick_participant">kick</div>
+    </div>
+    <label for="edit_board_add_participant">
+        Add Participant
+    </label>
+    <input type="email" placeholder="add user with email" name="edit_board_add_participant">
+    <div style="height: 2rem"></div>
+    <div class="edit_board_button_selection">
+        <div class="main_button" style="visibility: hidden"></div>
+        <div class="main_button" id="edit_participant_add">add</div>
+    </div>
+    <div id="border_settings"></div>
+    <div class="edit_board_button_selection">
+        <div class="main_button" style="visibility: hidden"></div>
+        <div class="main_button" id="edit_board_delete">delete</div>
+    </div>
+    <div class="edit_board_button_selection">
+        <div class="main_button" id="edit_board_cancel">cancel</div>
+        <div class="main_button" id="edit_board_save">save</div>
+    </div>
+</form>
+
+{% endblock content %}

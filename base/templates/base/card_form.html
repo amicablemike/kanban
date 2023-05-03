@@ -1,0 +1,53 @@
+{% load static %}
+{% block content %}
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>{{board.name}}</title>
+</head>
+<!-- <header>
+    <div class="navbar">
+        <div class="flex_help_container">
+           
+            <h1 class="home"><a href="{% url 'home' %}">Webprojekt</a></h1>
+        </div>
+        <ul class="nav_elements">
+            <li class="nav_element board_title">{{board.name}}</li>
+        </ul>
+        <div class="flex_help_container">
+            <div class="nav_element acc_expand">Account</div>
+            <div class="popover_account">
+                <div class="popover_account_container">
+                    <div class="popover_account_button">email@email.com</div>
+                    <div class="popover_account_buttons">
+                        <div class="popover_account_button">my boards</div>
+                        <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
+                            profile</div>
+                    </div>
+                    <div class="popover_account_button">Log out</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</header> -->
+<h1>Create Task for Board {{ board.name }}</h1>
+<form method="POST" action="" class="edit_card">
+    {% csrf_token %}
+
+    {{form.as_p}}
+    <input type="hidden" name="board_id" value="{{ board.id }}">
+    <input type="hidden" name="owner" value="{{ creator.email }}">
+    <div class="main_button"  id="edit_card_delete">delete</div>
+    <div class="main_button" id="edit_card_cancel">cancel</div>
+    <button class="main_button" type="submit" type="submit" id="edit_card_save">submit</button>
+</form>
+
+{% endblock content %}
