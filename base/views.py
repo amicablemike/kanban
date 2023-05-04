@@ -202,3 +202,21 @@ def updateCard(request, pk):
         
     context = {'form': form, 'board': board, 'task':task, 'creator': creator}
     return render(request, 'base/card_form.html', context)
+
+def deleteItem(request, pk):
+    
+    try:
+        task = Task.objects.get(id = pk)
+        board = Task.board
+        item = Task.objects.get(id = pk)
+    except:
+        board = Board.objects.get(id = pk)
+        item = Board.objects.get(id = pk)
+
+    if request.method == 'POST':
+        item.delete
+        return redirect(board_url)
+    
+    board_url = reverse('board', args=[board.id])
+    context = {'item': item, 'task': task, 'board': board} 
+    return render(request, 'base/delete_item.html', context)

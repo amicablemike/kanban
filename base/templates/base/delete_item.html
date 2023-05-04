@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+{% load static %}
+{% block content %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Signika:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel='stylesheet'
+        href='https://cdn-uicons.flaticon.com/uicons-regular-straight/css/uicons-regular-straight.css'>
+    <link rel="stylesheet" href="{% static 'styles/app.css' %}">
+    <title>{{board.name}}</title>
+</head>
+
+<body>
+
+    <form method="POST" action="" class="edit_card">
+        {% csrf_token %}
+    
+        <h3>Are you sure you want to delete this item?</h3>
+        
+        <div class="main_button"  id="edit_card_delete">Cancel</div>
+        <div class="main_button" id="edit_card_cancel">Yes</div>
+    </form>
+
+</body>
+
+
+
+</html>
+
+{% endblock content %}
