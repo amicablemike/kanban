@@ -74,11 +74,11 @@ def home(request):
     #     Q(description__icontains=q)
     # )
 
-    boards = Board.objects.all()[:8]
+    boards = Board.objects.all()[:]
     try:
-        myboards = Board.objects.filter(participants = request.user)[:8]
+        myboards = Board.objects.filter(participants = request.user)[:]
     except:
-        myboards = Board.objects.filter()[:8]
+        myboards = Board.objects.filter()[:]
     
     board_count = boards.count()
     

@@ -30,8 +30,8 @@
             </ul>
             <div class="flex_help_container">
                 {% if request.user.is_authenticated %}
-                <div class="nav_element acc_expand">Account</div>
-                <div class="popover_account">
+                <div class="nav_element acc_expand" onclick="location.pathname = './logout'"">Logout</div>
+                <!-- <div class=" popover_account">
                     <div class="popover_account_container">
                         <div class="popover_account_button">email@email.com</div>
                         <div class="popover_account_buttons">
@@ -39,9 +39,9 @@
                             <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
                                 profile</div>
                         </div>
-                        <div class="popover_account_button" onclick="location.pathname = './logout'" >Logout</div>
+                        <div class="popover_account_button" onclick="location.pathname = './logout'">Logout</div>
                     </div>
-                </div>
+                </div> -->
                 {% else %}
                 <div class="sign_options">
                     <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
@@ -62,11 +62,17 @@
                     <input type="text" class="searchbar" placeholder="Search for Boards" />
                     <div class="search_btn">
                         <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                    </div>  
+                    </div>
                 </div>
-                <div class="main_button edit_card_button add_card_button" onclick="location.pathname = './create_board'">new board</div>
-                
-               
+                <div class="board_preview_expand_container">
+                    <div class="board_preview_expand_line"></div>
+                    <!-- <div class="board_preview_expand">show more boards</div> -->
+                    <div class="board_preview_expand" style="margin-top: 1.5rem;"
+                        onclick="location.pathname = './create_board'">new board</div>
+                    <div class="board_preview_expand_line"></div>
+                </div>
+
+
                 <div class="board_previews">
                     {% for board in myboards %}
                     {% include 'base/board_item.html' %}

@@ -273,9 +273,9 @@ select {
     display: grid;
     padding: 0.5rem;
     grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(2, 1fr);
+    /* grid-template-rows: repeat(2, 1fr); */
     margin: 1rem 0;
-    // height: 35rem;
+    /* height: 35rem; */
     gap: 1rem;
 }
 
