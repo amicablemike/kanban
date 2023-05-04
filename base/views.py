@@ -99,8 +99,10 @@ def board(request, pk):
     task_form = TaskForm
     board_form = BoardForm
 
-    user_tasks = Task.objects.filter(owner = request.user)  
-
+    try:
+        user_tasks = Task.objects.filter(owner = request.user)  
+    except:
+        user_tasks = ""
 
     context = {'task_form': task_form, 'board': board, 'participants': participants, 'tasks_todo': tasks_todo, 'tasks_doing': tasks_doing, 'tasks_done': tasks_done,
                 'user_tasks': user_tasks, 'task': task, 'board_form': board_form, 'task_form': task_form}
@@ -175,7 +177,7 @@ def createCard(request, pk):
 
 
 def updateCard(request, pk):
-   #board = Board.objects.get(id = pk)
+    page = 'update-card'
     task = Task.objects.get(id = pk)
     board = task.board
     form = TaskForm(instance=task)
@@ -200,23 +202,37 @@ def updateCard(request, pk):
             form = TaskForm(request.POST, instance=task)
             return redirect('home')
         
-    context = {'form': form, 'board': board, 'task':task, 'creator': creator}
+    context = {'page': page, 'form': form, 'board': board, 'task':task, 'creator': creator}
     return render(request, 'base/card_form.html', context)
 
-def deleteItem(request, pk):
-    
-    try:
-        task = Task.objects.get(id = pk)
-        board = Task.board
-        item = Task.objects.get(id = pk)
-    except:
-        board = Board.objects.get(id = pk)
-        item = Board.objects.get(id = pk)
+def deleteBoard(request, pk):
+    page = 'delete-board'
+    board = Board.objects.get(id=pk)
 
+    if request.user != board.owner:
+        return HttpResponse('You are not allowed to do that!')
+    
     if request.method == 'POST':
-        item.delete
+        board.delete()
+        return redirect('home')
+    
+    
+    context = {'board': board, 'page': page} 
+    return render(request, 'base/delete_item.html', context)
+
+def deleteCard(request, pk):
+    page = 'delete-card'
+    task = Task.objects.get(id=pk)
+    board = task.board
+    board_url = reverse('board', args=[board.id])
+
+    if request.user != task.owner:
+        return HttpResponse('You are not allowed to do that!')
+    
+    if request.method == 'POST':
+        task.delete()
         return redirect(board_url)
     
-    board_url = reverse('board', args=[board.id])
-    context = {'item': item, 'task': task, 'board': board} 
+    
+    context = {'page': page,'task': task, 'board': board} 
     return render(request, 'base/delete_item.html', context)

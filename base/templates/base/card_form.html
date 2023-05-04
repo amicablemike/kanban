@@ -43,10 +43,13 @@
     {% csrf_token %}
 
     {{form.as_p}}
+
     <input type="hidden" name="board_id" value="{{ board.id }}">
     <input type="hidden" name="owner" value="{{ creator.email }}">
-    <div class="main_button"  id="edit_card_delete">delete</div>
-    <div class="main_button" id="edit_card_cancel">cancel</div>
+    {% if page == 'update-card' %}
+    <div class="main_button"  id="edit_card_delete" onclick="location.pathname = 'delete_card/{{task.id}}'">delete</div>
+    {% endif %}
+    <div class="main_button" id="edit_card_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel</div>
     <button class="main_button" type="submit" type="submit" id="edit_card_save">submit</button>
 </form>
 
