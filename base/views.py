@@ -73,18 +73,28 @@ def home(request):
     #     Q(name__icontains=q) |
     #     Q(description__icontains=q)
     # )
-
-    boards = Board.objects.all()[:]
-    try:
-        myboards = Board.objects.filter(participants = request.user)[:]
-    except:
-        myboards = Board.objects.filter()[:]
+    query = request.GET.get('q')
     
-    board_count = boards.count()
+    if query:
+        results = Board.objects.filter(name__icontains=query)
+        boards = results
+        try:
+            myboards = results.filter(participants = request.user)[:]
+        except:
+            myboards = Board.objects.all()  #warum try except?? - testen ohne try except
+    else:
+        results = []
+        boards = Board.objects.all()[:]
+        try:
+            myboards = Board.objects.filter(participants = request.user)[:]
+        except:
+            myboards = Board.objects.all()  #warum try except?? - testen ohne try except
+        
     
+    board_count = Board.objects.all()
 
 
-    context = {'boards': boards, 'myboards': myboards, 'board':board, 'board_count': board_count} 
+    context = {'results': results, 'boards': boards, 'myboards': myboards, 'board':board, 'board_count': board_count} 
     return render(request, 'base/home.html', context)
 
 
@@ -98,6 +108,20 @@ def board(request, pk):
     
     task_form = TaskForm
     board_form = BoardForm
+
+    #Search functionality
+    query = request.GET.get('q')
+    if query:
+        results = task.filter(name__icontains=query)
+        task_search = results
+        tasks_todo = tasks_todo.filter(name__icontains=query)
+        tasks_doing = tasks_doing.filter(name__icontains=query)
+        tasks_done = tasks_done.filter(name__icontains=query)
+        # try:
+        #     myboards = results.filter(participants = request.user)[:]
+        # except:
+        #     myboards = Board.objects.filte()  #warum try except?? - testen ohne try except
+    
 
     try:
         user_tasks = Task.objects.filter(owner = request.user)  

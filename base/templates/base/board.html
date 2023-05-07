@@ -100,10 +100,12 @@
             </div>
             <div class="sidebar right_sidebar">
                 <div class="search_container" id="board_search_titles_container">
-                    <input type="text" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
-                    <div class="search_btn">
-                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                    </div>
+                    <form>
+                        <input type="text" name="q" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
+                        <button class="search_btn" type="submit">
+                            <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                        </button>
+                    </form>
                 </div>
                 <div class="right_sidebar_user_task_title">My Tasks</div>
                 <ul class="right_sidebar_user_tasks">
