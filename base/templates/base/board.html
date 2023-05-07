@@ -19,41 +19,22 @@
 </head>
 
 <body>
-    <div class="backdrop"></div>
-    <header>
-        <div class="navbar">
-            <div class="flex_help_container">
-                <!-- currently set to logged in page, change on not logged in -->
-                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
-            </div>
-            <ul class="nav_elements">
-                <li class="nav_element board_title">{{board.name}}</li>
-                
-            </ul>
-            
-            <div class="flex_help_container">
-                <div class="nav_element acc_expand">Account</div>
-                <div class="popover_account">
-                    <div class="popover_account_container">
-                        <div class="popover_account_button">email@email.com</div>
-                        <div class="popover_account_buttons">
-                            <div class="popover_account_button">my boards</div>
-                            <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
-                                profile</div>
-                        </div>
-                        <div class="popover_account_button">Log out</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
+    <!-- macht das irgendwas? -->
+    <div class="backdrop"></div> 
+    
+    {% include 'navbar.html' %}
     <div class="content">
         <div class="status">
             <div class="sidebar left_sidebar">
                 <div class="left_sidebar_board_title">{{board.name}}</div>
                 <div class="left_sidebar_board_desc">{{board.description}}</div>
-                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'update_board/{{board.id}}/'">edit board</div></div>
-                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = './board/{{board.id}}/create_card/'">new card</div></div>
+                {% if request.user.is_authenticated %}
+                    <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'update_board/{{board.id}}/'">edit board</div></div>
+                    <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = './board/{{board.id}}/create_card/'">new card</div></div>
+                {% else %}
+                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">edit board</div></div>
+                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">new card</div></div>
+                {% endif %}
                 <div class="left_sidebar_participant_head">Participants</div>
                 <ul class="left_sidebar_ul">
                     {% for user in participants %}
@@ -115,7 +96,7 @@
                     {% endif %}
                     {% endfor %}
                 </ul>
-                <div class="main_button leave_board_button">leave board</div>
+                <div class="main_button leave_board_button" onclick="location.pathname = 'leave_board/{{board.id}}'">leave board</div>
             </div>
         </div>
     </div>

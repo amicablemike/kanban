@@ -19,38 +19,7 @@
 </head>
 
 <body>
-    <header>
-        <div class="navbar">
-            <div class="flex_help_container">
-                <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
-            </div>
-            <ul class="nav_elements">
-                <li class="nav_element my_board_btn">My Boards</li>
-                <li class="nav_element public_board_btn current_page">Public Boards</li>
-            </ul>
-            <div class="flex_help_container">
-                {% if request.user.is_authenticated %}
-                <div class="nav_element acc_expand" onclick="location.pathname = './logout'"">Logout</div>
-                <!-- <div class=" popover_account">
-                    <div class="popover_account_container">
-                        <div class="popover_account_button">email@email.com</div>
-                        <div class="popover_account_buttons">
-                            <div class="popover_account_button">my boards</div>
-                            <div class="popover_account_button" onclick="location.pathname = './Pages/profile.html'">
-                                profile</div>
-                        </div>
-                        <div class="popover_account_button" onclick="location.pathname = './logout'">Logout</div>
-                    </div>
-                </div> -->
-                {% else %}
-                <div class="sign_options">
-                    <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
-                    <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
-                </div>
-                {% endif %}
-            </div>
-        </div>
-    </header>
+    {% include 'navbar.html' %}
     <div class="content">
         <!-- start if for my boards when loged in -->
         <div id="back_color_my_boards">

@@ -2,7 +2,6 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from django.db.models import Q
 from .models import Board, Task
 from .forms import BoardForm, TaskForm
 from django.contrib.auth.models import User
@@ -68,72 +67,54 @@ def registerPage(request):
 
 
 def home(request):
-    # q = request.GET.get('q') if request.GET.get('q') != None else ''
-    # board = Board.objects.filter(
-    #     Q(name__icontains=q) |
-    #     Q(description__icontains=q)
-    # )
     query = request.GET.get('q')
-    
+    page = 'home'
     if query:
         results = Board.objects.filter(name__icontains=query)
         boards = results
         try:
-            myboards = results.filter(participants = request.user)[:]
+            myboards = results.filter(participants = request.user)
         except:
             myboards = Board.objects.all()  #warum try except?? - testen ohne try except
     else:
-        results = []
-        boards = Board.objects.all()[:]
+        boards = Board.objects.all() 
         try:
-            myboards = Board.objects.filter(participants = request.user)[:]
+            myboards = Board.objects.filter(participants = request.user)
         except:
-            myboards = Board.objects.all()  #warum try except?? - testen ohne try except
+            myboards = Board.objects.all()  #error umgehen, wenn user nicht angemeldet
         
-    
-    board_count = Board.objects.all()
-
-
-    context = {'results': results, 'boards': boards, 'myboards': myboards, 'board':board, 'board_count': board_count} 
+    context = {'page': page, 'boards': boards, 'myboards': myboards, 'board':board} 
     return render(request, 'base/home.html', context)
 
 
 def board(request, pk):
+    page = 'board'
     board = Board.objects.get(id=pk)
     participants = board.participants.all()
     tasks_todo = Task.objects.filter(board = pk, status = 'To-do')
     tasks_doing = Task.objects.filter(board = pk, status = 'Doing')
     tasks_done = Task.objects.filter(board = pk, status = 'Done')
-    task = Task.objects.filter(board = pk)
     
-    task_form = TaskForm
-    board_form = BoardForm
 
-    #Search functionality
+    #Search functionality über URL query
     query = request.GET.get('q')
     if query:
-        results = task.filter(name__icontains=query)
-        task_search = results
         tasks_todo = tasks_todo.filter(name__icontains=query)
         tasks_doing = tasks_doing.filter(name__icontains=query)
         tasks_done = tasks_done.filter(name__icontains=query)
-        # try:
-        #     myboards = results.filter(participants = request.user)[:]
-        # except:
-        #     myboards = Board.objects.filte()  #warum try except?? - testen ohne try except
     
-
     try:
         user_tasks = Task.objects.filter(owner = request.user)  
     except:
-        user_tasks = ""
+        user_tasks = "" # darf nicht None sein, falls user nicht eingelogged
 
-    context = {'task_form': task_form, 'board': board, 'participants': participants, 'tasks_todo': tasks_todo, 'tasks_doing': tasks_doing, 'tasks_done': tasks_done,
-                'user_tasks': user_tasks, 'task': task, 'board_form': board_form, 'task_form': task_form}
+    context = {'page': page, 'board': board, 'participants': participants, 'tasks_todo': tasks_todo, 'tasks_doing': tasks_doing, 'tasks_done': tasks_done,
+                'user_tasks': user_tasks}
     return render(request, 'base/board.html', context)
 
 @login_required(login_url='login')
 def createBoard(request):
+    page = 'create-board'
     form = BoardForm
     creator = request.user
 
@@ -149,10 +130,11 @@ def createBoard(request):
             form = BoardForm
             return redirect('home')
         
-    context = {'creator':creator, 'form': form}
+    context = {'page': page, 'creator':creator, 'form': form}
     return render(request, 'base/board_form.html', context)
 
 def updateBoard(request, pk):
+    page = 'update-board'
     board = Board.objects.get(id=pk)
     form = BoardForm(instance=board)
     board_url = reverse('board', args=[board.id])
@@ -172,11 +154,31 @@ def updateBoard(request, pk):
             return redirect('home')
         
 
-    context = {'board':board, 'form':form}
+    context = {'page': page, 'board':board, 'form':form}
     return render(request, 'base/board_form.html', context)
 
+def deleteBoard(request, pk):
+    page = 'delete-board'
+    board = Board.objects.get(id=pk)
+
+    if request.user != board.owner:
+        return HttpResponse('You are not allowed to do that!')
+    
+    if request.method == 'POST':
+        board.delete()
+        return redirect('home')
+    
+    
+    context = {'board': board, 'page': page} 
+    return render(request, 'base/delete_item.html', context)
+
+def leaveBoard(request, pk):
+    board = Board.objects.get(id = pk)
+    board.participants.remove(request.user)
+    return redirect('home')
 
 def createCard(request, pk):
+    page = 'create-card'
     board = Board.objects.get(id=pk)
     form = TaskForm
     creator = request.user
@@ -196,9 +198,8 @@ def createCard(request, pk):
         else:
             form = TaskForm()
 
-    context = {'form': form, 'board': board, 'creator': creator}
+    context = {'page': page, 'form': form, 'board': board, 'creator': creator}
     return render(request, 'base/card_form.html', context)
-
 
 def updateCard(request, pk):
     page = 'update-card'
@@ -207,6 +208,7 @@ def updateCard(request, pk):
     form = TaskForm(instance=task)
     board_url = reverse('board', args=[board.id])
     creator = request.user
+
 
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
@@ -228,21 +230,6 @@ def updateCard(request, pk):
         
     context = {'page': page, 'form': form, 'board': board, 'task':task, 'creator': creator}
     return render(request, 'base/card_form.html', context)
-
-def deleteBoard(request, pk):
-    page = 'delete-board'
-    board = Board.objects.get(id=pk)
-
-    if request.user != board.owner:
-        return HttpResponse('You are not allowed to do that!')
-    
-    if request.method == 'POST':
-        board.delete()
-        return redirect('home')
-    
-    
-    context = {'board': board, 'page': page} 
-    return render(request, 'base/delete_item.html', context)
 
 def deleteCard(request, pk):
     page = 'delete-card'

@@ -13,58 +13,24 @@
     <link rel="stylesheet" href="{% static 'styles/app.css' %}">
     <title>{{board.name}}</title>
 </head>
+<body>
+    {% include 'navbar.html' %}
+    <form method="POST" action="" class="edit_board">
+        {% csrf_token %}
 
-
-<form method="POST" action="" class="edit_board">
-    {% csrf_token %}
-
-    {{form.as_p}}
-
-    <!-- <div class="edit_board_overlay_title">Board Settings</div>
-    <label for="edit_board_title">
-        Title
-    </label>
-    <input type="text" name="edit_board_title" placeholder="new title">
-    <label for="edit_board_description">
-        Description
-    </label>
-    <textarea name="edit_board_description" id="card_desc_input" cols="30" rows="5"
-        placeholder="new description"></textarea>
-    <label for="edit_board_select_participant">
-        Participants
-    </label>
-    <select name="edit_board_select_participant" id="">
-            {% for user in participants %}
-            <option>{{user.username}}</option>
-            {% endfor %}
-    </select>
-    <div></div>
-    <div class="edit_board_button_selection">
-        <div class="main_button promote_participant">to owner</div>
-        <div class="main_button kick_participant">kick</div>
-    </div>
-    <label for="edit_board_add_participant">
-        Add Participant
-    </label>
-    <input type="email" placeholder="add user with email" name="edit_board_add_participant">
-    <div style="height: 2rem"></div>
-    <div class="edit_board_button_selection">
-        <div class="main_button" style="visibility: hidden"></div>
-        <div class="main_button" id="edit_participant_add">add</div>
-    </div> -->
-
-
-    <div id="border_settings"></div>
-    <div class="edit_board_button_selection">
-        <div class="main_button" style="visibility: hidden"></div>
+        {{form.as_p}}
         
-        <div class="main_button" id="edit_board_delete" onclick="location.pathname = 'delete_board/{{board.id}}'">delete</div>
-        
-    </div>
-    <div class="edit_board_button_selection">
-        <div class="main_button" id="edit_board_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel</div>
-        <button class="main_button" type="submit" id="edit_board_save">submit</button>
-    </div>
-</form>
-
+        <div id="border_settings"></div>
+        <div class="edit_board_button_selection">
+            <div class="main_button" style="visibility: hidden"></div>
+            
+            <div class="main_button" id="edit_board_delete" onclick="location.pathname = 'delete_board/{{board.id}}'">delete</div>
+            
+        </div>
+        <div class="edit_board_button_selection">
+            <div class="main_button" id="edit_board_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel</div>
+            <button class="main_button" type="submit" id="edit_board_save">submit</button>
+        </div>
+    </form>
+</body>
 {% endblock content %}

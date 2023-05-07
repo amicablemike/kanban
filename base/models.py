@@ -10,21 +10,10 @@ class Board(models.Model):
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
 
-    # class Meta:
-    #     ordering = ['-updated', '-created']
-
-    # def save(self, **kwargs):
-    #     super(Board, self).save(**kwargs)
-    #     task = Task(board=self)
-
-    #     task.save()
-
     def __str__(self):
         return self.name
 
 class Task(models.Model):
-    
-    
     STATUS_OPTIONS = (
         ('To-do', 'To-do'),
         ('Doing', 'Doing'),
@@ -45,15 +34,11 @@ class Task(models.Model):
     priority = models.CharField(max_length=50, null=True, choices=PRIORITY_OPTIONS) 
     status = models.CharField(max_length=50, choices=STATUS_OPTIONS)
 
-
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
-
-
 
     class Meta:
         ordering = ['-updated', '-created']
     
     def __str__(self):
         return self.name
-

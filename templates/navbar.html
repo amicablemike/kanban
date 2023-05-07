@@ -1,20 +1,26 @@
-<a href="/">
-    <h1>LOGO</h1>
-</a>
-
-<form method="GET" action="{% url 'home' %}">
-    <input type="text" name="q" placeholder="Search Boards...">
-</form>
-
-{% if request.user.is_authenticated %}
-<p>Hello {{request.user}}</p>
-<a href="{% url 'logout' %}">Logout</a>
-
-
-{% else %}
-
-<a href="{% url 'login' %}">Login</a>
-
-{% endif %}
-
-<hr>
+<header>
+    <div class="navbar">
+        <div class="flex_help_container">
+            <h1 class="home" onclick="location.pathname = '.'">Webprojekt</h1>
+        </div>
+        <ul class="nav_elements">
+            {% if page == 'home' %}
+                    {% if request.user.is_authenticated %}
+                    <li class="nav_element my_board_btn">My Boards</li>
+                    {% endif %}
+                <li class="nav_element public_board_btn current_page">Public Boards</li>
+            {% endif %}
+        </ul>
+        <div class="flex_help_container">
+            {% if request.user.is_authenticated %}
+            <div class="nav_element acc_expand" onclick="location.pathname = './logout'"">Logout</div>
+            
+            {% else %}
+            <div class="sign_options">
+                <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
+                <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</header>

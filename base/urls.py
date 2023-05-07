@@ -15,6 +15,7 @@ urlpatterns = [
     path('create_board/', views.createBoard, name='create-board'),
     path('update_board/<str:pk>/', views.updateBoard, name='update-board'),
     path('delete_board/<str:pk>', views.deleteBoard, name='delete-board'),
+    path('leave_board/<str:pk>', views.leaveBoard, name='leave-board'),
 
     #card CRUD
     path('board/<str:pk>/create_card/', views.createCard, name='create-card'),
