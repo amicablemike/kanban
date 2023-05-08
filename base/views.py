@@ -242,7 +242,7 @@ def deleteCard(request, pk):
     board = task.board
     board_url = reverse('board', args=[board.id])
 
-    if request.user != task.owner:
+    if request.user != task.owner and request.user != board.owner:
         return HttpResponse('You are not allowed to do that!')
     
     if request.method == 'POST':
