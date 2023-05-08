@@ -97,7 +97,8 @@ def board(request, pk):
     
 
     #Search functionality über URL query
-    query = request.GET.get('q')
+    
+    query = request.GET.get('q2')
     if query:
         tasks_todo = tasks_todo.filter(name__icontains=query)
         tasks_doing = tasks_doing.filter(name__icontains=query)
