@@ -17,7 +17,7 @@ class BoardForm(ModelForm):
         return board
 
 class TaskForm(ModelForm):
-    board_id = forms.IntegerField(widget=forms.HiddenInput())
+    #board_id = forms.IntegerField(widget=forms.HiddenInput())
     estimate = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
     
     class Meta:

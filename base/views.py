@@ -52,15 +52,19 @@ def registerPage(request):
         pass1 = request.POST['pass1']
         pass2 = request.POST['pass2']
 
-        myUser = User.objects.create_user(username, email, pass1)
-        myUser.first_name = fname
-        myUser.last_name = lname
+        try:
+            if pass1 == pass2:
+                myUser = User.objects.create_user(username, email, pass1)
+                myUser.first_name = fname
+                myUser.last_name = lname
+                myUser.save()
 
-        myUser.save()
-
-        messages.success(request, "Your Account has been created successfully.")
-
-        return redirect('login')
+                return redirect('login')
+            else:
+                return HttpResponse('Passwords dont match!')
+        except:
+            return HttpResponse('Bad Credentials!')
+        
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
