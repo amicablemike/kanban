@@ -20,8 +20,8 @@
 
 <body>
     <!-- macht das irgendwas? -->
-    <div class="backdrop"></div> 
-    
+    <div class="backdrop"></div>
+
     {% include 'navbar.html' %}
     <div class="content">
         <div class="status">
@@ -29,11 +29,23 @@
                 <div class="left_sidebar_board_title">{{board.name}}</div>
                 <div class="left_sidebar_board_desc">{{board.description}}</div>
                 {% if request.user.is_authenticated %}
-                    <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'update_board/{{board.id}}/'">edit board</div></div>
-                    <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = './board/{{board.id}}/create_card/'">new card</div></div>
+                <div>
+                    <div class="main_button edit_card_button add_card_button"
+                        onclick="location.pathname = 'update_board/{{board.id}}/'">edit board</div>
+                </div>
+                <div>
+                    <div class="main_button edit_card_button add_card_button"
+                        onclick="location.pathname = './board/{{board.id}}/create_card/'">new card</div>
+                </div>
                 {% else %}
-                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">edit board</div></div>
-                <div><div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">new card</div></div>
+                <div>
+                    <div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">
+                        edit board</div>
+                </div>
+                <div>
+                    <div class="main_button edit_card_button add_card_button" onclick="location.pathname = 'login/'">new
+                        card</div>
+                </div>
                 {% endif %}
                 <div class="left_sidebar_participant_head">Participants</div>
                 <ul class="left_sidebar_ul">
@@ -77,17 +89,15 @@
                     {% for task in tasks_done %}
                     {% include 'base/task_item.html' %}
                     {% endfor %}
-                    </div>
+                </div>
             </div>
             <div class="sidebar right_sidebar">
-                <div class="search_container" id="board_search_titles_container">
-                    <form>
-                        <input type="text" name="q" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
-                        <button class="search_btn" type="submit">
-                            <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                        </button>
-                    </form>
-                </div>
+                <form class="search_container" id="board_search_titles_container">
+                    <input type="text" name="q" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
+                    <button class="search_btn" type="submit">
+                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                    </button>
+                </form>
                 <div class="right_sidebar_user_task_title">My Tasks</div>
                 <ul class="right_sidebar_user_tasks">
                     {% for task in user_tasks %}
@@ -96,7 +106,8 @@
                     {% endif %}
                     {% endfor %}
                 </ul>
-                <div class="main_button leave_board_button" onclick="location.pathname = 'leave_board/{{board.id}}'">leave board</div>
+                <div class="main_button leave_board_button" onclick="location.pathname = 'leave_board/{{board.id}}'">
+                    leave board</div>
             </div>
         </div>
     </div>

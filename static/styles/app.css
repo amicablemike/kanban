@@ -242,6 +242,7 @@ h1 {
     background-color: rgb(255, 145, 0);
     cursor: pointer;
     border-radius: 3px;
+    border: none;
 }
 
 .search_btn>img {
@@ -315,13 +316,14 @@ select {
 }
 
 .board_preview_expand_container {
+    width: fit-content;
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     gap: 0.5rem;
     cursor: pointer;
-    margin: auto;
+    margin: 1rem auto;
     transition: transform 0.2s;
 }
 

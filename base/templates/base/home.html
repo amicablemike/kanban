@@ -27,23 +27,18 @@
             {% if request.user.is_authenticated %}
             <div class="board_overview" id="my_boards">
                 <h1>My Boards</h1>
-                <div class="search_container">
-                    <form>
-                        <input type="text" name="q" class="searchbar" placeholder="Search for Boards"/>
-                        <button type="sutbmit" class="search_btn">
-                            <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                        </button>
-                    </form>
-                </div>
+                <form class="search_container">
+                    <input type="text" name="q" class="searchbar" placeholder="Search for Boards" />
+                    <button type="sutbmit" class="search_btn">
+                        <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                    </button>
+                </form>
                 <div class="board_preview_expand_container">
                     <div class="board_preview_expand_line"></div>
                     <!-- <div class="board_preview_expand">show more boards</div> -->
-                    <div class="board_preview_expand" style="margin-top: 1.5rem;"
-                        onclick="location.pathname = './create_board'">new board</div>
+                    <div class="board_preview_expand" onclick="location.pathname = './create_board'">new board</div>
                     <div class="board_preview_expand_line"></div>
                 </div>
-
-
                 <div class="board_previews">
                     {% for board in myboards %}
                     {% include 'base/board_item.html' %}
@@ -52,27 +47,27 @@
                     <div class="public_boards_anchor"></div>
                 </div>
             </div>
-            {% else %}
-            <div class="board_overview" id="my_boards">
-                <h1>Log in to add your own boards!</h1>
-                <div class="search_container">
-                    <form>
-                        <input type="text" name="q" class="searchbar" placeholder="Search for Boards"/>
-                        <button type="sutbmit" class="search_btn">
-                            <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
-                        </button>
-                    </form>
-                </div>
-                <div class="board_preview_expand_container">
-                    <div class="board_preview_expand_line"></div>
-                    <!-- <div class="board_preview_expand">show more boards</div> -->
-                    <div class="board_preview_expand" style="margin-top: 1.5rem;"
-                        onclick="location.pathname = './login'">Log in</div>
-                    <div class="board_preview_expand_line"></div>
-                </div>
-            </div>
-            {% endif %}
+
+
         </div>
+        {% else %}
+        <div class="board_overview" id="my_boards">
+            <h1>Log in to add your own boards!</h1>
+            <form class="search_container">
+                <input type="text" name="q" class="searchbar" placeholder="Search for Boards" />
+                <button type="sutbmit" class="search_btn">
+                    <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
+                </button>
+            </form>
+            <div class="board_preview_expand_container">
+                <div class="board_preview_expand_line"></div>
+                <!-- <div class="board_preview_expand">show more boards</div> -->
+                <div class="board_preview_expand" onclick="location.pathname = './login'">
+                    Log in</div>
+                <div class="board_preview_expand_line"></div>
+            </div>
+        </div>
+        {% endif %}
         <!-- End If for MyBoards when loged in -->
         <div id="back_color_public_boards">
             <div class="board_overview" id="public_boards">
@@ -92,6 +87,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <script src="{% static 'js/account_expand.js' %}"></script>
     <script src="{% static 'js/homepage.js' %}"></script>
