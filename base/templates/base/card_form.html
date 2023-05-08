@@ -1,5 +1,6 @@
 {% load static %}
 {% block content %}
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,21 +14,28 @@
     <link rel="stylesheet" href="{% static 'styles/app.css' %}">
     <title>{{board.name}}</title>
 </head>
+
 <body>
     {% include 'navbar.html' %}
-    <h1>Create Task for Board {{ board.name }}</h1>
-    <form method="POST" action="" class="edit_card">
-        {% csrf_token %}
+    <div class="content">
+        <div class="fixed_centered_container">
+            <h1 class="edit_head">Create Task for Board {{ board.name }}</h1>
+            <form method="POST" action="" class="edit_card">
+                {% csrf_token %}
 
-        {{form.as_p}}
+                {{form.as_p}}
 
-        <input type="hidden" name="board_id" value="{{ board.id }}">
-        <input type="hidden" name="owner" value="{{ creator.email }}">
-        {% if page == 'update-card' %}
-        <div class="main_button"  id="edit_card_delete" onclick="location.pathname = 'delete_card/{{task.id}}'">delete</div>
-        {% endif %}
-        <div class="main_button" id="edit_card_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel</div>
-        <button class="main_button" type="submit" type="submit" id="edit_card_save">submit</button>
-    </form>
+                <input type="hidden" name="board_id" value="{{ board.id }}">
+                <input type="hidden" name="owner" value="{{ creator.email }}">
+                {% if page == 'update-card' %}
+                <div class="main_button" id="edit_card_delete" onclick="location.pathname = 'delete_card/{{task.id}}'">
+                    delete</div>
+                {% endif %}
+                <div class="main_button" id="edit_card_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel
+                </div>
+                <button class="main_button" type="submit" type="submit" id="edit_card_save">submit</button>
+            </form>
+        </div>
+    </div>
 </body>
 {% endblock content %}

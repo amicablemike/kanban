@@ -93,7 +93,8 @@
             </div>
             <div class="sidebar right_sidebar">
                 <form class="search_container" id="board_search_titles_container">
-                    <input type="text" name="q2" class="searchbar" id="board_search_titles" placeholder="Search Cards" />
+                    <input type="text" name="q2" class="searchbar" id="board_search_titles"
+                        placeholder="Search Cards" />
                     <button class="search_btn" type="submit">
                         <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
                     </button>
@@ -110,12 +111,6 @@
                     leave board</div>
             </div>
         </div>
-    </div>
-    <div class="edit_card_container">
-        {% include 'base/task_form.html' %}
-    </div>
-    <div class="edit_board_container ">
-        {% include 'base/board_form.html' %}
     </div>
     <script src="{% static 'js/board.js' %}"></script>
     <script src="{% static 'js/account_expand.js' %}"></script>

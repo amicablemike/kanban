@@ -225,6 +225,12 @@ h1 {
     text-align: center;
 }
 
+.edit_head {
+    color: white;
+    border-bottom: 1px solid white;
+    padding: 1rem;
+}
+
 .search_container {
     display: flex;
     justify-content: center;
@@ -579,6 +585,13 @@ Namensänderung Public zu all boards */
     border-top: 1px solid white;
 }
 
+.fixed_centered_container {
+    position: fixed;
+    left: 50%;
+    top: auto;
+    transform: translate(-50%, 0);
+}
+
 .edit_card {
     /* width: 30rem; */
     display: grid;
@@ -605,6 +618,32 @@ Namensänderung Public zu all boards */
     z-index: 1000;
     box-shadow: 0 0 5px rgb(0 0 0 / 0.8);
     align-items: center;
+}
+
+.delete_board {
+    display: grid;
+    gap: 0.5rem;
+    padding: 2rem;
+    grid-template-columns: repeat(2, 1fr);
+    margin: auto;
+    background-color: rgb(44, 102, 110);
+    border-radius: 3px;
+    color: white;
+    z-index: 1000;
+    box-shadow: 0 0 5px rgb(0 0 0 / 0.8);
+    align-items: center;
+}
+
+.delete_board>h3 {
+    grid-column: 1/3;
+    text-align: center;
+    color: rgb(10, 9, 12);
+    margin: 0;
+}
+
+.delete_board>h3:nth-of-type(2) {
+    font-size: 2rem;
+    color: white;
 }
 
 .edit_board_overlay_title {

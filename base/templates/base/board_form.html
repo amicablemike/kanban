@@ -17,24 +17,31 @@
 
 <body>
     {% include 'navbar.html' %}
-    <form method="POST" action="" class="edit_board">
-        {% csrf_token %}
+    <div class="content">
+        <div class="fixed_centered_container">
+            <h1 class="edit_head"> Edit Board {{ board.name }}</h1>
+            <form method="POST" action="" class="edit_board">
+                {% csrf_token %}
 
-        {{form}}
+                {{form}}
 
-        <div id="border_settings"></div>
-        <div class="edit_board_button_selection">
-            <div class="main_button" style="visibility: hidden"></div>
+                <div id="border_settings"></div>
+                <div class="edit_board_button_selection">
+                    <div class="main_button" style="visibility: hidden"></div>
 
-            <div class="main_button" id="edit_board_delete" onclick="location.pathname = 'delete_board/{{board.id}}'">
-                delete</div>
+                    <div class="main_button" id="edit_board_delete"
+                        onclick="location.pathname = 'delete_board/{{board.id}}'">
+                        delete</div>
 
+                </div>
+                <div class="edit_board_button_selection">
+                    <div class="main_button" id="edit_board_cancel" onclick="location.pathname = 'board/{{board.id}}'">
+                        cancel
+                    </div>
+                    <button class="main_button" type="submit" id="edit_board_save">submit</button>
+                </div>
+            </form>
         </div>
-        <div class="edit_board_button_selection">
-            <div class="main_button" id="edit_board_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel
-            </div>
-            <button class="main_button" type="submit" id="edit_board_save">submit</button>
-        </div>
-    </form>
+    </div>
 </body>
 {% endblock content %}

@@ -20,19 +20,34 @@
 
 <body>
     {% include 'navbar.html' %}
-    <form method="POST" action="" class="edit_card">
-        {% csrf_token %}
-        
-        {% if page == 'delete-board' %}
-        <h3>Are you sure you want to delete the board with the title {{board.name}}?</h3>
-        {% endif %}
+    <div class="content">
+        <div class="fixed_centered_container">
+            {% if page == 'delete-board' %}
+            <h1 class="edit_head">Delete Board</h1>
+            {% endif %}
+            {% if page == 'delete-card' %}
+            <h1 class="edit_head">Delete Card</h1>
+            {% endif %}
+            <form method="POST" action="" class="delete_board">
+                {% csrf_token %}
 
-        {% if page == 'delete-card' %}
-        <h3>Are you sure you want to delete the card with the title {{task.name}}?</h3>
-        {% endif %}
-        <div class="main_button"  id="edit_card_delete" onclick="location.pathname = 'board/{{board.id}}'">Cancel</div>
-        <button class="main_button" type="submit" id="edit_card_cancel">Yes</button>
-    </form>
+                {% if page == 'delete-board' %}
+                <h3>Are you sure you want to delete the board with the title:</h3>
+                <h3>"{{board.name}}"</h3>
+                <h3>?</h3>
+                {% endif %}
+
+                {% if page == 'delete-card' %}
+                <h3>Are you sure you want to delete the card with the title:</h3>
+                <h3>"{{task.name}}"</h3>
+                <h3>?</h3>
+                {% endif %}
+                <div class="main_button" id="edit_card_delete" onclick="location.pathname = 'board/{{board.id}}'">Cancel
+                </div>
+                <button class="main_button" type="submit" id="edit_card_cancel">Yes</button>
+            </form>
+        </div>
+    </div>
 
 </body>
 
