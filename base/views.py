@@ -175,6 +175,11 @@ def deleteBoard(request, pk):
 def leaveBoard(request, pk):
     board = Board.objects.get(id = pk)
     board.participants.remove(request.user)
+
+    #delete board if no participant exists
+    if not board.participants.exists():
+        board.delete()
+
     return redirect('home')
 
 def createCard(request, pk):
