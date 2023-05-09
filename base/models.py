@@ -9,9 +9,14 @@ class Board(models.Model):
     participants = models.ManyToManyField(User, related_name="participants", blank=True)
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
-
+    
+    class Meta:
+        ordering = ['-updated', '-created']
+    
     def __str__(self):
         return self.name
+    
+
 
 class Task(models.Model):
     STATUS_OPTIONS = (
