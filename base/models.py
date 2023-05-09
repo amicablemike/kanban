@@ -25,7 +25,7 @@ class Task(models.Model):
         ('Mid', 'Mid'),
         ('High', 'High'),
     )
-    
+
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, null=True)
     board = models.ForeignKey(Board, on_delete=models.CASCADE, null=True)
     name = models.CharField(max_length=200, null=True) #title

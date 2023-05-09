@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="{% static 'styles/app.css' %}">
     <title>{{board.name}}</title>
 </head>
-
+{% if page == 'update-board' %}
 <body>
     {% include 'navbar.html' %}
     <div class="content">
@@ -44,4 +44,31 @@
         </div>
     </div>
 </body>
+{% else %}
+<body>
+    {% include 'navbar.html' %}
+    <div class="content">
+        <div class="fixed_centered_container">
+            <h1 class="edit_head"> Create a Board</h1>
+            <form method="POST" action="" class="edit_board">
+                {% csrf_token %}
+
+                {{form}}
+
+                <div id="border_settings"></div>
+                <div class="edit_board_button_selection">
+                    <div class="main_button" style="visibility: hidden"></div>
+
+                </div>
+                <div class="edit_board_button_selection">
+                    <div class="main_button" id="edit_board_cancel" onclick="location.pathname = ''">
+                        cancel
+                    </div>
+                    <button class="main_button" type="submit" id="edit_board_save">submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+{% endif %}
 {% endblock content %}
