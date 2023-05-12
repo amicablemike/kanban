@@ -6,9 +6,9 @@ urlpatterns = [
     path('', views.home, name='home'),
 
     #managing users
-    path('login/', views.loginPage, name='login'),
+    path('register/', views.registerUser, name='register'),
+    path('login/', views.loginUser, name='login'),
     path('logout/', views.logoutUser, name='logout'),
-    path('register/', views.registerPage, name='register'),
 
     #board CRUD
     path('board/<str:pk>', views.board, name='board'),

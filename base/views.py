@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib import messages
-from django.contrib.auth.decorators import login_required
 from .models import Board, Task
 from .forms import BoardForm, TaskForm
 from django.contrib.auth.models import User
@@ -11,37 +10,7 @@ from django.urls import reverse
 
 # Create your views here.
 
-def loginPage(request):
-
-    page = 'login'
-
-    if request.method =='POST':
-        username = request.POST['username'].lower()
-        pass1 = request.POST['pass1']
-
-        try:
-            user = User.objects.get(username=username)
-        except:
-            messages.error(request, 'User does not exist.')
-        
-        user = authenticate(request, username=username, password=pass1)
-
-        if user is not None:
-            login(request, user)
-            # fname = user.first_name
-
-            return redirect('home')
-        else:
-            messages.error(request, 'Username and Password do not match.')
-
-    context = {'page': page}
-    return render(request, 'base/login_register.html', context)
-
-def logoutUser(request):
-    logout(request)
-    return redirect('home')
-
-def registerPage(request):
+def registerUser(request):
     page='register'
 
     if request.method == 'POST':
@@ -58,8 +27,8 @@ def registerPage(request):
                 myUser.first_name = fname
                 myUser.last_name = lname
                 myUser.save()
-
                 return redirect('login')
+                
             else:
                 return HttpResponse('Passwords dont match!')
         except:
@@ -70,58 +39,61 @@ def registerPage(request):
     return render(request, 'base/login_register.html', context)
 
 
+def loginUser(request):
+    page = 'login'
+
+    if request.method =='POST':
+        username = request.POST['username'].lower()
+        pass1 = request.POST['pass1']
+
+        try:
+            user = User.objects.get(username=username)
+        except:
+            return HttpResponse('ERROR: User does not exist!')
+        
+        user = authenticate(request, username=username, password=pass1)
+        
+        if user is not None:
+            login(request, user)
+            return redirect('home')
+        else:
+            return HttpResponse('ERROR: Username and Password do not match!')
+
+    context = {'page': page}
+    return render(request, 'base/login_register.html', context)
+
+
+def logoutUser(request):
+    logout(request)
+    return redirect('home')
+
+
 def home(request):
-    query = request.GET.get('q')
     page = 'home'
+    query = request.GET.get('q')
+    
+    #Search functionality
     if query:
         results = Board.objects.filter(name__icontains=query)
         boards = results
         try:
             myboards = results.filter(participants = request.user)
         except:
-            myboards = Board.objects.all()  #warum try except?? - testen ohne try except
+            myboards = ''   #if user is not loged in
     else:
         boards = Board.objects.all() 
         try:
             myboards = Board.objects.filter(participants = request.user)
         except:
-            myboards = Board.objects.all()  #error umgehen, wenn user nicht angemeldet
+            myboards = ''   #if user is not loged in
         
     context = {'page': page, 'boards': boards, 'myboards': myboards, 'board':board} 
     return render(request, 'base/home.html', context)
 
 
-def board(request, pk):
-    page = 'board'
-    board = Board.objects.get(id=pk)
-    participants = board.participants.all()
-    tasks_todo = Task.objects.filter(board = pk, status = 'To-do')
-    tasks_doing = Task.objects.filter(board = pk, status = 'Doing')
-    tasks_done = Task.objects.filter(board = pk, status = 'Done')
-    
-
-    #Search functionality über URL query
-    
-    query = request.GET.get('q2')
-    if query:
-        tasks_todo = tasks_todo.filter(name__icontains=query)
-        tasks_doing = tasks_doing.filter(name__icontains=query)
-        tasks_done = tasks_done.filter(name__icontains=query)
-    
-    try:
-        user_tasks = Task.objects.filter(owner = request.user)  
-    except:
-        user_tasks = "" # darf nicht None sein, falls user nicht eingelogged
-
-    context = {'page': page, 'board': board, 'participants': participants, 'tasks_todo': tasks_todo, 'tasks_doing': tasks_doing, 'tasks_done': tasks_done,
-                'user_tasks': user_tasks}
-    return render(request, 'base/board.html', context)
-
-@login_required(login_url='login')
 def createBoard(request):
     page = 'create-board'
     form = BoardForm
-    creator = request.user
 
     if request.method == 'POST':
         form = BoardForm(request.POST)
@@ -132,35 +104,60 @@ def createBoard(request):
             board.participants.add(request.user)
             return redirect('home')
         else:
-            form = BoardForm
-            return redirect('home')
+            return HttpResponse('ERROR: invalid form - action unsuccessful!')
         
-    context = {'page': page, 'creator':creator, 'form': form}
+    context = {'page': page, 'form': form}
     return render(request, 'base/board_form.html', context)
+
+
+def board(request, pk):
+    page = 'board'
+    board = Board.objects.get(id=pk)
+    participants = board.participants.all()
+    query = request.GET.get('q2')   #Search functionality über URL query
+    
+    if query:
+        tasks_todo = tasks_todo.filter(name__icontains=query)
+        tasks_doing = tasks_doing.filter(name__icontains=query)
+        tasks_done = tasks_done.filter(name__icontains=query)
+    else:
+        tasks_todo = Task.objects.filter(board = pk, status = 'To-do')
+        tasks_doing = Task.objects.filter(board = pk, status = 'Doing')
+        tasks_done = Task.objects.filter(board = pk, status = 'Done')
+    
+    try:
+        user_tasks = Task.objects.filter(owner = request.user)  
+    except:
+        user_tasks = "" #if user is not loged in
+
+    context = {'page': page, 'board': board, 'participants': participants, 'tasks_todo': tasks_todo, 'tasks_doing': tasks_doing, 'tasks_done': tasks_done,
+                'user_tasks': user_tasks}
+    return render(request, 'base/board.html', context)
+
 
 def updateBoard(request, pk):
     page = 'update-board'
     board = Board.objects.get(id=pk)
     form = BoardForm(instance=board)
-    board_url = reverse('board', args=[board.id])
+    
 
     if request.method == 'POST':
         form = BoardForm(request.POST, instance=board)
         if form.is_valid():
-            board = form.save(commit=False)
-            #task.owner = request.user  # den eingeloggten User als owner des Tasks setzen
-            #task.board = board
             form.save()
             
             board.participants.add(request.user)
+            board_url = reverse('board', args=[pk])
             return redirect(board_url)
         else:
-            form = BoardForm(request.POST, instance=board)
-            return redirect('home')
+            return HttpResponse('ERROR: invalid form - action unsuccessful!')
+
+            # FEHLERMELDUNG !!
         
 
     context = {'page': page, 'board':board, 'form':form}
     return render(request, 'base/board_form.html', context)
+
 
 def deleteBoard(request, pk):
     page = 'delete-board'
@@ -177,6 +174,7 @@ def deleteBoard(request, pk):
     context = {'board': board, 'page': page} 
     return render(request, 'base/delete_item.html', context)
 
+
 def leaveBoard(request, pk):
     board = Board.objects.get(id = pk)
     board.participants.remove(request.user)
@@ -187,59 +185,50 @@ def leaveBoard(request, pk):
 
     return redirect('home')
 
+
 def createCard(request, pk):
     page = 'create-card'
     board = Board.objects.get(id=pk)
     form = TaskForm
-    creator = request.user
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
             task = form.save(commit=False)
-            task.owner = request.user  # den eingeloggten User als owner des Tasks setzen
-            task.board = board
+            task.owner = request.user   # loged in user becomes owner
+            task.board = board          # active board 
             form.save()
 
             board.participants.add(request.user)
-            
             board_url = reverse('board', args=[pk])
             return redirect(board_url)
         else:
-            form = TaskForm()
+            return HttpResponse('ERROR: invalid form - action unsuccessful!')
 
-    context = {'page': page, 'form': form, 'board': board, 'creator': creator}
+    context = {'page': page, 'form': form, 'board': board}
     return render(request, 'base/card_form.html', context)
+
 
 def updateCard(request, pk):
     page = 'update-card'
     task = Task.objects.get(id = pk)
     board = task.board
     form = TaskForm(instance=task)
-    board_url = reverse('board', args=[board.id])
-    creator = request.user
-
 
     if request.method == 'POST':
         form = TaskForm(request.POST, instance=task)
-        print()
-            # do something with the form data
         if form.is_valid():
-            task = form.save(commit=False)
-            #task.owner = request.user  # den eingeloggten User als owner des Tasks setzen
-            #task.board = board
             form.save()
             
             board.participants.add(request.user)
-            
-            #board_url = reverse('board', args=[pk])
+            board_url = reverse('board', args=[board.id])
             return redirect(board_url)
         else:
-            form = TaskForm(request.POST, instance=task)
-            return redirect('home')
+            return HttpResponse('ERROR: invalid form - action unsuccessful!')
         
-    context = {'page': page, 'form': form, 'board': board, 'task':task, 'creator': creator}
+    context = {'page': page, 'form': form, 'board': board, 'task':task}
     return render(request, 'base/card_form.html', context)
+
 
 def deleteCard(request, pk):
     page = 'delete-card'

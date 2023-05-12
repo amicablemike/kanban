@@ -7,6 +7,7 @@ class Board(models.Model):
     name = models.CharField(max_length=200, null=True)
     description = models.TextField(null=True, blank=True)
     participants = models.ManyToManyField(User, related_name="participants", blank=True)
+    
     updated = models.DateTimeField(auto_now=True, null=True)
     created = models.DateTimeField(auto_now_add=True, null=True)
     
