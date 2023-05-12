@@ -1,18 +1,17 @@
 const body = document.body
 
 const navPublicBoards = document.querySelector(".public_board_btn")
-const publicBoards = document.querySelector(".public_boards_anchor")
+const publicBoards = document.querySelector("#public_boards")
 
 navPublicBoards.addEventListener("click", () => {
-    publicBoards.scrollIntoView({ behavior: "smooth", block: "center" })
+    publicBoards.scrollIntoView({ behavior: "smooth", block: "start" })
 })
 
 const navMyBoards = document.querySelector(".my_board_btn")
-const myBoards = document.querySelector(".my_boards_anchor")
-
+const myBoards = document.querySelector("#my_boards")
 
 navMyBoards.addEventListener("click", () => {
-    myBoards.scrollIntoView({ behavior: "smooth", block: "center" })
+    myBoards.scrollIntoView({ behavior: "smooth", block: "start" })
 })
 
 window.addEventListener("scroll", () => {
@@ -36,33 +35,33 @@ function isInViewport(element) {
     );
 }
 
-const btnAddBoards = document.querySelectorAll(".add_board")
+// const btnAddBoards = document.querySelectorAll(".add_board")
 
-for (let btnAddBoard of btnAddBoards) {
-    btnAddBoard.addEventListener("click", () => {
-        showBoardEdit()
-    })
-}
+// for (let btnAddBoard of btnAddBoards) {
+//     btnAddBoard.addEventListener("click", () => {
+//         showBoardEdit()
+//     })
+// }
 
-const btnCancelAddBoard = document.querySelector("#edit_board_cancel")
+// const btnCancelAddBoard = document.querySelector("#edit_board_cancel")
 
-btnCancelAddBoard.addEventListener("click", () => {
-    hideBoardEdit()
-})
+// btnCancelAddBoard.addEventListener("click", () => {
+//     hideBoardEdit()
+// })
 
-const boardEditContainer = document.querySelector(".edit_board_container")
+// const boardEditContainer = document.querySelector(".edit_board_container")
 
-function showBoardEdit(showDel = false) {
-    console.log("trigger")
-    if (showDel == false) {
-        boardEditContainer.querySelector("#edit_board_delete").classList.add("hide_delete")
-    }
-    else {
-        boardEditContainer.querySelector("#edit_board_delete").classList.remove("hide_delete")
-    }
-    boardEditContainer.classList.add("edit_container_show")
-}
+// function showBoardEdit(showDel = false) {
+//     console.log("trigger")
+//     if (showDel == false) {
+//         boardEditContainer.querySelector("#edit_board_delete").classList.add("hide_delete")
+//     }
+//     else {
+//         boardEditContainer.querySelector("#edit_board_delete").classList.remove("hide_delete")
+//     }
+//     boardEditContainer.classList.add("edit_container_show")
+// }
 
-function hideBoardEdit() {
-    boardEditContainer.classList.remove("edit_container_show")
-}
+// function hideBoardEdit() {
+//     boardEditContainer.classList.remove("edit_container_show")
+// }

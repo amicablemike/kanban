@@ -23,7 +23,6 @@
     <div class="content">
         <!-- start if for my boards when loged in -->
         <div id="back_color_my_boards">
-            <div class="my_boards_anchor"></div>
             {% if request.user.is_authenticated %}
             <div class="board_overview" id="my_boards">
                 <h1>My Boards</h1>
@@ -41,10 +40,9 @@
                 </div>
                 <div class="board_previews">
                     {% for board in myboards %}
-                        {% include 'base/board_item.html' %}
+                    {% include 'base/board_item.html' %}
                     {% endfor %}
                     <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
-                    <div class="public_boards_anchor"></div>
                 </div>
             </div>
         </div>
@@ -81,7 +79,6 @@
                     {% include 'base/board_item.html' %}
                     {% endfor %}
                     <!-- insert 4 board previews here after click on board_preview_expand_container (see below) -->
-                    <div class="public_boards_anchor"></div>
                 </div>
             </div>
         </div>
