@@ -9,7 +9,6 @@ from django.contrib.auth.forms import User
 from django.urls import reverse
 
 # Create your views here.
-
 def registerUser(request):
     page='register'
 
@@ -28,12 +27,10 @@ def registerUser(request):
                 myUser.last_name = lname
                 myUser.save()
                 return redirect('login')
-                
             else:
                 return HttpResponse('Passwords dont match!')
         except:
             return HttpResponse('Bad Credentials!')
-        
 
     context = {'page': page}
     return render(request, 'base/login_register.html', context)
@@ -52,7 +49,6 @@ def loginUser(request):
             return HttpResponse('ERROR: User does not exist!')
         
         user = authenticate(request, username=username, password=pass1)
-        
         if user is not None:
             login(request, user)
             return redirect('home')
@@ -70,9 +66,8 @@ def logoutUser(request):
 
 def home(request):
     page = 'home'
-    query = request.GET.get('q')
+    query = request.GET.get('q')    #Search functionality über URL query
     
-    #Search functionality
     if query:
         results = Board.objects.filter(name__icontains=query)
         boards = results
@@ -139,21 +134,16 @@ def updateBoard(request, pk):
     page = 'update-board'
     board = Board.objects.get(id=pk)
     form = BoardForm(instance=board)
-    
 
     if request.method == 'POST':
         form = BoardForm(request.POST, instance=board)
         if form.is_valid():
             form.save()
-            
             board.participants.add(request.user)
             board_url = reverse('board', args=[pk])
             return redirect(board_url)
         else:
-            return HttpResponse('ERROR: invalid form - action unsuccessful!')
-
-            # FEHLERMELDUNG !!
-        
+            return HttpResponse('ERROR: invalid form - action unsuccessful!')        
 
     context = {'page': page, 'board':board, 'form':form}
     return render(request, 'base/board_form.html', context)
@@ -170,7 +160,6 @@ def deleteBoard(request, pk):
         board.delete()
         return redirect('home')
     
-    
     context = {'board': board, 'page': page} 
     return render(request, 'base/delete_item.html', context)
 
@@ -179,8 +168,7 @@ def leaveBoard(request, pk):
     board = Board.objects.get(id = pk)
     board.participants.remove(request.user)
 
-    #delete board if no participant exists
-    if not board.participants.exists():
+    if not board.participants.exists(): #delete board if no participant exists
         board.delete()
 
     return redirect('home')
@@ -198,7 +186,6 @@ def createCard(request, pk):
             card.owner = request.user   # loged in user becomes owner
             card.board = board          # active board 
             form.save()
-
             board.participants.add(request.user)
             board_url = reverse('board', args=[pk])
             return redirect(board_url)
@@ -219,7 +206,6 @@ def updateCard(request, pk):
         form = CardForm(request.POST, instance=card)
         if form.is_valid():
             form.save()
-            
             board.participants.add(request.user)
             board_url = reverse('board', args=[board.id])
             return redirect(board_url)
@@ -242,7 +228,6 @@ def deleteCard(request, pk):
     if request.method == 'POST':
         card.delete()
         return redirect(board_url)
-    
     
     context = {'page': page,'card': card, 'board': board} 
     return render(request, 'base/delete_item.html', context)
