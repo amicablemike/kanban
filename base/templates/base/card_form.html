@@ -19,7 +19,7 @@
     {% include 'navbar.html' %}
     <div class="content">
         <div class="fixed_centered_container">
-            <h1 class="edit_head">Create Task for Board {{ board.name }}</h1>
+            <h1 class="edit_head">Create Card for Board {{ board.name }}</h1>
             <form method="POST" action="" class="edit_card">
                 {% csrf_token %}
 
@@ -27,7 +27,7 @@
 
                 
                 {% if page == 'update-card' %}
-                <div class="main_button" id="edit_card_delete" onclick="location.pathname = 'delete_card/{{task.id}}'">
+                <div class="main_button" id="edit_card_delete" onclick="location.pathname = 'delete_card/{{card.id}}'">
                     delete</div>
                 {% endif %}
                 <div class="main_button" id="edit_card_cancel" onclick="location.pathname = 'board/{{board.id}}'">cancel

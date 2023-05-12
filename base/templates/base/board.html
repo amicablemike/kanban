@@ -62,8 +62,8 @@
                     <div class="card_dropzone top">
                         <div class="expandable"></div>
                     </div>
-                    {% for task in tasks_todo %}
-                    {% include 'base/task_item.html' %}
+                    {% for card in cards_todo %}
+                    {% include 'base/card_item.html' %}
                     {% endfor %}
                 </div>
                 <div class="board_column board_column_doing">
@@ -74,8 +74,8 @@
                         <div class="expandable"></div>
                     </div>
 
-                    {% for task in tasks_doing %}
-                    {% include 'base/task_item.html' %}
+                    {% for card in cards_doing %}
+                    {% include 'base/card_item.html' %}
                     {% endfor %}
                 </div>
                 <div class="board_column board_column_done">
@@ -86,8 +86,8 @@
                         <div class="expandable"></div>
                     </div>
 
-                    {% for task in tasks_done %}
-                    {% include 'base/task_item.html' %}
+                    {% for card in cards_done %}
+                    {% include 'base/card_item.html' %}
                     {% endfor %}
                 </div>
             </div>
@@ -99,11 +99,11 @@
                         <img src="{% static 'Images/Icons/suche.svg' %}" alt="search">
                     </button>
                 </form>
-                <div class="right_sidebar_user_task_title">My Tasks</div>
-                <ul class="right_sidebar_user_tasks">
-                    {% for task in user_tasks %}
-                    {% if task.board == board %}
-                    <li>{{task.name}}</li>
+                <div class="right_sidebar_user_card_title">My Cards</div>
+                <ul class="right_sidebar_user_cards">
+                    {% for card in user_cards %}
+                    {% if card.board == board %}
+                    <li>{{card.name}}</li>
                     {% endif %}
                     {% endfor %}
                 </ul>

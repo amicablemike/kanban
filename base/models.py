@@ -19,7 +19,7 @@ class Board(models.Model):
     
 
 
-class Task(models.Model):
+class Card(models.Model):
     STATUS_OPTIONS = (
         ('To-do', 'To-do'),
         ('Doing', 'Doing'),

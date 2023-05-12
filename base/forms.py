@@ -1,6 +1,6 @@
 # from django.utils import timezone
 from django.forms import ModelForm
-from .models import Board, Task
+from .models import Board, Card
 from django import forms
 from django.forms.widgets import DateInput
 
@@ -16,19 +16,19 @@ class BoardForm(ModelForm):
     #         board.save()
     #     return board
 
-class TaskForm(ModelForm):
+class CardForm(ModelForm):
     #board_id = forms.IntegerField(widget=forms.HiddenInput())
     estimate = forms.DateField(widget=DateInput(attrs={'type': 'date'}))
     
     class Meta:
-        model = Task
+        model = Card
         fields = ('name', 'description', 'priority', 'status', 'estimate')
 
     # def save(self, commit=True):
-    #     task = super().save(commit=False)
-    #     task.created = timezone.now()  # set the created field
+    #     card = super().save(commit=False)
+    #     card.created = timezone.now()  # set the created field
     #     if commit:
-    #         task.save()
-    #     return task
+    #         card.save()
+    #     return card
 
 

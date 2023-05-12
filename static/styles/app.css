@@ -881,7 +881,7 @@ label[for="edit_card_description"] {
     content: "(Owner)";
 }
 
-.right_sidebar_user_tasks {
+.right_sidebar_user_cards {
     display: flex;
     flex-direction: column;
     list-style: none;
@@ -889,7 +889,7 @@ label[for="edit_card_description"] {
     margin: 0;
 }
 
-.right_sidebar_user_tasks>li {
+.right_sidebar_user_cards>li {
     padding: 1rem;
     border-bottom: 1px solid black;
     border-right: 1px solid black;
