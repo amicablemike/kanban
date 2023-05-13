@@ -679,6 +679,7 @@ select {
 
 .add_card_button {
     box-shadow: 0 0 5px rgb(0 0 0 / 0.8);
+    color: black;
 }
 
 label[for="edit_card_title"] {

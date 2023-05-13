@@ -5,10 +5,10 @@
         </div>
         <ul class="nav_elements">
             {% if page == 'home' %}
-                    {% if request.user.is_authenticated %}
-                    <li class="nav_element my_board_btn">My Boards</li>
-                    {% endif %}
-                <li class="nav_element public_board_btn current_page">Public Boards</li>
+            {% if request.user.is_authenticated %}
+            <li class="nav_element my_board_btn">My Boards</li>
+            {% endif %}
+            <li class="nav_element public_board_btn">Public Boards</li>
             {% endif %}
         </ul>
         <div class="flex_help_container">
@@ -16,7 +16,7 @@
             <div class="nav_element acc_expand" onclick="location.pathname = './logout'"">Logout</div>
             
             {% else %}
-            <div class="sign_options">
+            <div class=" sign_options">
                 <div class="log_in_btn" onclick="location.pathname = './login'">Log in</div>
                 <div class="sign_up_btn" onclick="location.pathname = './register'">Sign up</div>
             </div>
