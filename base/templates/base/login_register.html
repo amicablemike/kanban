@@ -19,10 +19,11 @@
 </head>
 
 {% include 'navbar.html' %}
+
 <body>
-    
+
     {% if page == 'login' %}
-    
+
     <div class="content">
         <div class="back_color_sign_in">
             <div class="sign_in_container">
@@ -36,13 +37,14 @@
                     <div class="sign_in_item">
                         <label for="" class="label">
                             Username
-                            <input type="text" id= 'username' name="username" placeholder="Type in your username">
+                            <input type="text" id='username' name="username" placeholder="Type in your username">
                         </label>
                     </div>
                     <div class="sign_in_item">
                         <label for="" class="label">
                             Password
-                            <input type="password" id='pass1' name="pass1" maxlength="30" minlength="6" placeholder="Type in your password">
+                            <input type="password" id='pass1' name="pass1" maxlength="30" minlength="6"
+                                placeholder="Type in your password">
                         </label>
                     </div>
                     <div class="sign_in_item">
@@ -58,8 +60,7 @@
 
     <!-- register -->
     {% else %}
-    <div class="backdrop"></div>
-    
+
     <div class="content">
         <div class="profile_settings_container">
             <form action="/register/" method="POST" class="profile_settings">
@@ -91,8 +92,6 @@
             </form>
         </div>
     </div>
-
-    <script src=""></script>
 </body>
 
 </html>

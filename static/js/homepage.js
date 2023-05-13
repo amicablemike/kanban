@@ -34,34 +34,3 @@ function isInViewport(element) {
         rect.right <= (window.innerWidth || document.documentElement.clientWidth)
     );
 }
-
-// const btnAddBoards = document.querySelectorAll(".add_board")
-
-// for (let btnAddBoard of btnAddBoards) {
-//     btnAddBoard.addEventListener("click", () => {
-//         showBoardEdit()
-//     })
-// }
-
-// const btnCancelAddBoard = document.querySelector("#edit_board_cancel")
-
-// btnCancelAddBoard.addEventListener("click", () => {
-//     hideBoardEdit()
-// })
-
-// const boardEditContainer = document.querySelector(".edit_board_container")
-
-// function showBoardEdit(showDel = false) {
-//     console.log("trigger")
-//     if (showDel == false) {
-//         boardEditContainer.querySelector("#edit_board_delete").classList.add("hide_delete")
-//     }
-//     else {
-//         boardEditContainer.querySelector("#edit_board_delete").classList.remove("hide_delete")
-//     }
-//     boardEditContainer.classList.add("edit_container_show")
-// }
-
-// function hideBoardEdit() {
-//     boardEditContainer.classList.remove("edit_container_show")
-// }
