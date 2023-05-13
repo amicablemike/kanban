@@ -166,7 +166,9 @@ def deleteBoard(request, pk):
 
 def leaveBoard(request, pk):
     board = Board.objects.get(id = pk)
-    board.participants.remove(request.user)
+    
+    if request.user.is_authenticated:
+        board.participants.remove(request.user)
 
     if not board.participants.exists(): #delete board if no participant exists
         board.delete()
