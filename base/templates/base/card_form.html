@@ -19,7 +19,11 @@
     {% include 'navbar.html' %}
     <div class="content">
         <div class="fixed_centered_container">
+            {% if page == 'update-card' %}
+            <h1 class="edit_head">Update Card for Board {{ board.name }}</h1>
+            {% else %}
             <h1 class="edit_head">Create Card for Board {{ board.name }}</h1>
+            {% endif %}
             <form method="POST" action="" class="edit_card">
                 {% csrf_token %}
 
